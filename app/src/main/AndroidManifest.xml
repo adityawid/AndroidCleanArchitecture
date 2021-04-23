@@ -9,18 +9,26 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AndroidCleanArchitecture">
-        <activity android:name=".MainActivity">
+        <activity android:name=".view.ui.SplashActivity"
+            android:theme="@style/NoActionBar.Dark">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
+        <activity android:name=".view.ui.MainActivity"/>
         <activity
             android:name="com.adityawidayanto.core.ui.LoginActivity"
-            android:windowSoftInputMode="stateHidden"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+
+        <meta-data
+            android:name="APP_VERSION_CODE"
+            android:value="${APP_VERSION_CODE}" />
+        <meta-data
+            android:name="APP_VERSION_NAME"
+            android:value="${APP_VERSION_NAME}" />
     </application>
 
 </manifest>
