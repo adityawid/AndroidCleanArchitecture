@@ -1,4 +1,4 @@
-package com.adityawidayanto.androidcleanarchitecture
+package com.adityawidayanto.moviesshow
 
 import org.junit.Test
 

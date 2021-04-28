@@ -1,8 +1,8 @@
-package com.adityawidayanto.androidcleanarchitecture.view.ui
+package com.adityawidayanto.moviesshow.view.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.adityawidayanto.androidcleanarchitecture.R
+import com.adityawidayanto.moviesshow.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
