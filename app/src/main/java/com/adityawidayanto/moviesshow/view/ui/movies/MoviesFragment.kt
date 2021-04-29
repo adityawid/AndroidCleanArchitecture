@@ -8,11 +8,13 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.adityawidayanto.moviesshow.R
 import com.adityawidayanto.moviesshow.databinding.MoviesFragmentBinding
 import com.adityawidayanto.moviesshow.di.AppModule
 import com.adityawidayanto.moviesshow.di.DaggerAppComponent
+import com.adityawidayanto.moviesshow.view.ui.home.HomeFragmentDirections
 import javax.inject.Inject
 
 class MoviesFragment : Fragment() {
@@ -50,6 +52,7 @@ class MoviesFragment : Fragment() {
 
         viewModel.getMovies()
         adapter.onItemClick = { selected ->
+            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToDetailFragment())
             Toast.makeText(context, "judul " + selected.title, Toast.LENGTH_SHORT).show()
         }
     }

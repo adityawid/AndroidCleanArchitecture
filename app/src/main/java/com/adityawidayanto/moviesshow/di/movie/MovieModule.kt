@@ -58,7 +58,7 @@ class MovieModule {
     @Provides
     fun provideMovieRemoteDataSource(movieApi: MovieApi): MovieRemoteDatasource {
         return MovieRemoteDataSourceImpl(
-            movieApi, "f60ae473c8d03fdd88e75848cea96a8e"
+            movieApi, "e6508f8656792e766393d152f71fca5c"
         )
     }
 
