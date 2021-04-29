@@ -4,5 +4,4 @@ import com.adityawidayanto.db.bean.Movie
 
 interface MovieRepository {
     suspend fun getMovies(): List<Movie>?
-
 }

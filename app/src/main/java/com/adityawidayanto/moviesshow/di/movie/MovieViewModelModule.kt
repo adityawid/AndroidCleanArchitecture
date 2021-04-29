@@ -7,7 +7,6 @@ import dagger.Module
 
 @Module
 abstract class MovieViewModelModule {
-
     @Binds
     internal abstract fun bindMovieViewModel(viewModel: MoviesViewModel): ViewModel
 }

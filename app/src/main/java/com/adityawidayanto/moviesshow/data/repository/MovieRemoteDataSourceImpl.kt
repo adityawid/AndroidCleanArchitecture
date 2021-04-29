@@ -7,7 +7,7 @@ import retrofit2.Response
 class MovieRemoteDataSourceImpl(
     private val movieApi: MovieApi,
     private val apiKey: String
-) : MovieRemoteDatasource {
+) : MovieRemoteDataSource {
     override suspend fun getMovies(): Response<MovieList> = movieApi.getPopularMovies(apiKey)
 
 }

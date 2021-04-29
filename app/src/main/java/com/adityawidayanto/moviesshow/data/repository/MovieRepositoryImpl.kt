@@ -5,7 +5,7 @@ import com.adityawidayanto.db.bean.Movie
 import com.adityawidayanto.moviesshow.domain.repository.MovieRepository
 
 class MovieRepositoryImpl(
-    private val movieRemoteDatasource: MovieRemoteDatasource,
+    private val movieRemoteDatasource: MovieRemoteDataSource,
 ) : MovieRepository {
     override suspend fun getMovies(): List<Movie>? = getMoviesFromApi()
 

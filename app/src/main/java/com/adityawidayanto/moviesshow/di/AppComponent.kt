@@ -1,6 +1,7 @@
 package com.adityawidayanto.moviesshow.di
 
 import com.adityawidayanto.moviesshow.di.movie.MovieComponent
+import com.adityawidayanto.moviesshow.di.tvshow.TvShowComponent
 import dagger.Component
 import javax.inject.Singleton
 
@@ -15,6 +16,7 @@ import javax.inject.Singleton
 interface AppComponent {
     //    fun inject(moviesFragment: MoviesFragment)
     fun movieComponent(): MovieComponent.Factory
+    fun tvShowComponent(): TvShowComponent.Factory
 
 //    @Component.Builder
 //    interface Builder {
@@ -23,9 +25,4 @@ interface AppComponent {
 //        fun appModule(appModule: AppModule): Builder
 //        fun build(): AppComponent
 //    }
-}
-
-interface Injector {
-    fun createMovieComponent(): MovieComponent
-
 }

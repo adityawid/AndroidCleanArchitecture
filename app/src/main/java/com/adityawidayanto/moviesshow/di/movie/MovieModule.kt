@@ -2,8 +2,8 @@ package com.adityawidayanto.moviesshow.di.movie
 
 import com.adityawidayanto.core.network.ServiceGenerator
 import com.adityawidayanto.moviesshow.data.api.MovieApi
+import com.adityawidayanto.moviesshow.data.repository.MovieRemoteDataSource
 import com.adityawidayanto.moviesshow.data.repository.MovieRemoteDataSourceImpl
-import com.adityawidayanto.moviesshow.data.repository.MovieRemoteDatasource
 import com.adityawidayanto.moviesshow.data.repository.MovieRepositoryImpl
 import com.adityawidayanto.moviesshow.domain.repository.MovieRepository
 import com.adityawidayanto.moviesshow.domain.usecase.MoviesUseCase
@@ -39,7 +39,7 @@ class MovieModule {
     @Provides
     @MovieScope
     fun provideMovieRepository(
-        movieRemoteDatasource: MovieRemoteDatasource,
+        movieRemoteDatasource: MovieRemoteDataSource,
     ): MovieRepository {
 
         return MovieRepositoryImpl(
@@ -56,7 +56,7 @@ class MovieModule {
 
     @MovieScope
     @Provides
-    fun provideMovieRemoteDataSource(movieApi: MovieApi): MovieRemoteDatasource {
+    fun provideMovieRemoteDataSource(movieApi: MovieApi): MovieRemoteDataSource {
         return MovieRemoteDataSourceImpl(
             movieApi, "e6508f8656792e766393d152f71fca5c"
         )
