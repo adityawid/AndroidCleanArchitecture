@@ -19,9 +19,6 @@ class MoviesViewModel
     private var job = SupervisorJob()
     override val coroutineContext: CoroutineContext = Dispatchers.Main + job
 
-//    private val movieRepository = MovieRepositoryImpl()
-//        private val getMoviesUseCase: MoviesUseCase = MoviesUseCase(movieRepository)
-
     private var _movieList = MutableLiveData<List<Movie>>()
     val movieList: LiveData<List<Movie>> get() = _movieList
 

@@ -38,10 +38,6 @@ class MoviesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         DaggerAppComponent.builder().appModule(AppModule())
             .build().movieComponent().create().inject(this)
-//        DaggerMovieComponent.builder()
-//            .movieModule(MovieModule())
-//            .build()
-//            .inject(this)
         initViewModels()
         initEvent()
     }
@@ -51,8 +47,8 @@ class MoviesFragment : Fragment() {
         binding.rvMovieList.layoutManager = LinearLayoutManager(context)
         adapter = MovieAdapter()
         binding.rvMovieList.adapter = adapter
-        viewModel.getMovies()
 
+        viewModel.getMovies()
         adapter.onItemClick = { selected ->
             Toast.makeText(context, "judul " + selected.title, Toast.LENGTH_SHORT).show()
         }
@@ -62,11 +58,10 @@ class MoviesFragment : Fragment() {
         viewModel = ViewModelProvider(this, factory)
             .get(MoviesViewModel::class.java)
         viewModel.movieList.observe(viewLifecycleOwner) {
-            if (it != null && it.isNotEmpty()) {
+            if (it != null) {
                 adapter.setData(it)
                 adapter.notifyDataSetChanged()
             }
         }
     }
-
 }
