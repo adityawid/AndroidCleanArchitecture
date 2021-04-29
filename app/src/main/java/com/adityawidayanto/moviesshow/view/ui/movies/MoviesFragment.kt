@@ -21,12 +21,8 @@ class MoviesFragment : Fragment() {
     @Inject
     lateinit var factory: MovieViewModelFactory
     private lateinit var viewModel: MoviesViewModel
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     private lateinit var binding: MoviesFragmentBinding
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
