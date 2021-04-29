@@ -9,7 +9,7 @@ import com.adityawidayanto.moviesshow.R
 import com.adityawidayanto.moviesshow.databinding.ItemMovieBinding
 import com.bumptech.glide.Glide
 
-class MovieAdapter : RecyclerView.Adapter<MyViewHolder>() {
+class MovieAdapter : RecyclerView.Adapter<MovieAdapter.MyViewHolder>() {
     private val movieList = ArrayList<Movie>()
     var onItemClick: ((Movie) -> Unit)? = null
 
@@ -38,19 +38,26 @@ class MovieAdapter : RecyclerView.Adapter<MyViewHolder>() {
 
     override fun getItemCount(): Int = movieList.size
 
-}
+    inner class MyViewHolder(val binding: ItemMovieBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        init {
+            binding.root.setOnClickListener {
+                onItemClick?.invoke(movieList[adapterPosition])
+            }
+        }
 
-class MyViewHolder(val binding: ItemMovieBinding) :
-    RecyclerView.ViewHolder(binding.root) {
-    fun bind(movie: Movie) {
-        binding.titleTextView.text = movie.title
-        binding.descriptionTextView.text = movie.overview
-        val posterURL = "https://image.tmdb.org/t/p/w500" + movie.posterPath
-        Glide.with(binding.imageView.context)
-            .load(posterURL)
-            .into(binding.imageView)
+        fun bind(movie: Movie) {
+            binding.titleTextView.text = movie.title
+            binding.descriptionTextView.text = movie.overview
+            val posterURL = "https://image.tmdb.org/t/p/w500" + movie.posterPath
+            Glide.with(binding.imageView.context)
+                .load(posterURL)
+                .into(binding.imageView)
+
+        }
+
 
     }
-
-
 }
+
+

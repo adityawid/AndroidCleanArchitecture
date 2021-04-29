@@ -4,9 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.adityawidayanto.moviesshow.R
 import com.adityawidayanto.moviesshow.databinding.MoviesFragmentBinding
 import com.adityawidayanto.moviesshow.di.AppModule
@@ -46,22 +48,25 @@ class MoviesFragment : Fragment() {
 
     private lateinit var adapter: MovieAdapter
     private fun initEvent() {
-//        binding.rvMovieList.layoutManager = LinearLayoutManager(context)
-//        adapter = MovieAdapter()
-//        binding.rvMovieList.adapter = adapter
+        binding.rvMovieList.layoutManager = LinearLayoutManager(context)
+        adapter = MovieAdapter()
+        binding.rvMovieList.adapter = adapter
         viewModel.getMovies()
-//        displayPopularMovies()
+
+        adapter.onItemClick = { selected ->
+            Toast.makeText(context, "judul " + selected.title, Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun initViewModels() {
         viewModel = ViewModelProvider(this, factory)
             .get(MoviesViewModel::class.java)
-//        viewModel.movieList.observe(viewLifecycleOwner) {
-//            if (it != null && it.isNotEmpty()) {
-//                println("test Adit "+it.size)
-//                println("test Adit "+it[0].title)
-//            }
-//        }
+        viewModel.movieList.observe(viewLifecycleOwner) {
+            if (it != null && it.isNotEmpty()) {
+                adapter.setData(it)
+                adapter.notifyDataSetChanged()
+            }
+        }
     }
 
 }
