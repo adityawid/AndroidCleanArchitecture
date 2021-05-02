@@ -2,13 +2,17 @@ package com.adityawidayanto.movies.view.ui.movielist
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.adityawidayanto.core.CoreApp
 import com.adityawidayanto.core.ui.BaseFragment
 import com.adityawidayanto.db.entity.Movie
 import com.adityawidayanto.movies.R
+import com.adityawidayanto.movies.data.bean.DetailBean
 import com.adityawidayanto.movies.databinding.PopularMovieFragmentBinding
 import com.adityawidayanto.movies.di.DaggerMovieComponent
+import com.adityawidayanto.movies.view.ui.home.MainFragmentDirections
 
 class PopularMovieFragment : BaseFragment<PopularMovieFragmentBinding, PopularMovieViewModel>() {
 
@@ -20,6 +24,14 @@ class PopularMovieFragment : BaseFragment<PopularMovieFragmentBinding, PopularMo
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         vm.getPopularMovie()
+        adapter.onItemClick = { selected ->
+            findNavController().navigate(
+                MainFragmentDirections.actionMainFragmentToDetailFragment(
+                    DetailBean(selected.id, selected.title, selected.posterPath, selected.overview)
+                )
+            )
+            Toast.makeText(context, "judul " + selected.title, Toast.LENGTH_SHORT).show()
+        }
     }
 
     override fun initObservers() {

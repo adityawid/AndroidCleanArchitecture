@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.adityawidayanto.core.di.ViewModelFactory
 import com.adityawidayanto.core.di.ViewModelKey
+import com.adityawidayanto.movies.view.ui.detail.DetailViewModel
 import com.adityawidayanto.movies.view.ui.movielist.PopularMovieViewModel
 import com.adityawidayanto.movies.view.ui.tvshowlist.PopularTvShowViewModel
 import dagger.Binds
@@ -24,4 +25,9 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(PopularTvShowViewModel::class)
     abstract fun providesTvShowListViewModel(viewModel: PopularTvShowViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(DetailViewModel::class)
+    abstract fun providesDetailViewModel(viewModel: DetailViewModel): ViewModel
 }

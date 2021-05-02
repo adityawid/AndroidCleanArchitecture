@@ -8,5 +8,18 @@
         android:id="@+id/mainFragment"
         android:name="com.adityawidayanto.movies.view.ui.home.MainFragment"
         android:label="fragment_main"
-        tools:layout="@layout/fragment_main" />
+        tools:layout="@layout/fragment_main">
+        <action
+            android:id="@+id/action_mainFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="com.adityawidayanto.movies.view.ui.detail.DetailFragment"
+        android:label="detail_fragment"
+        tools:layout="@layout/detail_fragment">
+        <argument
+            android:name="detail"
+            app:argType="com.adityawidayanto.movies.data.bean.DetailBean" />
+    </fragment>
 </navigation>

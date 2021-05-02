@@ -3,7 +3,7 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-parcelize'
     id 'kotlin-kapt'
-//    id 'androidx.navigation.safeargs.kotlin'
+    id 'androidx.navigation.safeargs.kotlin'
 }
 apply from: '../shared_dependencies.gradle'
 
@@ -110,6 +110,7 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
 
     implementation project(':core')
+    implementation project(':common')
     implementation project(':db')
 
     // Navigation
