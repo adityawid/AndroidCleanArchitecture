@@ -8,7 +8,7 @@ import java.io.IOException
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException
 
-class RemoteDataSource {
+open class RemoteDataSource {
     open suspend fun <T> safeApiCall(
         dispatcher: CoroutineDispatcher,
         apiCall: suspend () -> T
