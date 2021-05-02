@@ -9,7 +9,7 @@ import com.adityawidayanto.movies.databinding.ActivitySplashBinding
 
 class SplashActivity : AppCompatActivity() {
 
-    private var splashBinding :ActivitySplashBinding? = null
+    private var splashBinding: ActivitySplashBinding? = null
     private val splashTimeout = 5500L
 
     override fun onCreate(savedInstanceState: Bundle?) {

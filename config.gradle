@@ -1,13 +1,13 @@
 rootProject.ext.configs = [
         debug  : [
-                APP_NAME            : "Clean Arch",
+                APP_NAME            : "Movie Show",
                 APP_VERSION_CODE    : 1,
                 APP_VERSION_NAME    : "1.0.0",
                 APP_MATRIX_VERSION  : 1.1,
         ],
 
         release: [
-                APP_NAME            : "Clean Arch",
+                APP_NAME            : "Movie Show",
                 APP_VERSION_CODE    : 1,
                 APP_VERSION_NAME    : "1.0.0",
                 APP_MATRIX_VERSION  : 1.1,
