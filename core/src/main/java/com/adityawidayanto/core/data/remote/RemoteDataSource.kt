@@ -1,5 +1,6 @@
-package com.adityawidayanto.core.network
+package com.adityawidayanto.core.data.remote
 
+import com.adityawidayanto.core.network.HttpResult
 import com.adityawidayanto.core.utils.Result
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext

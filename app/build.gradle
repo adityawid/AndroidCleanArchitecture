@@ -3,7 +3,7 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-parcelize'
     id 'kotlin-kapt'
-    id 'androidx.navigation.safeargs.kotlin'
+//    id 'androidx.navigation.safeargs.kotlin'
 }
 apply from: '../shared_dependencies.gradle'
 
@@ -12,13 +12,12 @@ android {
     buildToolsVersion "30.0.3"
 
     defaultConfig {
-        applicationId "com.adityawidayanto.moviesshow"
+        applicationId "com.adityawidayanto.movies"
         minSdkVersion 19
         targetSdkVersion 30
         versionCode rootProject.ext.configs.release["APP_VERSION_CODE"]
         versionName rootProject.ext.configs.release["APP_VERSION_NAME"]
         flavorDimensions "versionCode"
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -96,6 +95,7 @@ android {
         exclude 'META-INF/NOTICE.txt'
         exclude 'META-INF/notice.txt'
         exclude 'META-INF/ASL2.0'
+        exclude("META-INF/*.kotlin_module")
     }
 
 }
