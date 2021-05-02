@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.adityawidayanto.core.di.ViewModelFactory
 import com.adityawidayanto.core.di.ViewModelKey
 import com.adityawidayanto.movies.view.ui.movielist.PopularMovieViewModel
+import com.adityawidayanto.movies.view.ui.tvshowlist.PopularTvShowViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
@@ -18,4 +19,9 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(PopularMovieViewModel::class)
     abstract fun providesMovieListViewModel(viewModel: PopularMovieViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(PopularTvShowViewModel::class)
+    abstract fun providesTvShowListViewModel(viewModel: PopularTvShowViewModel): ViewModel
 }

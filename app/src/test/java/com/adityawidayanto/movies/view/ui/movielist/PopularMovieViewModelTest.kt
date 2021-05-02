@@ -5,7 +5,6 @@ import androidx.lifecycle.Observer
 import com.adityawidayanto.core.network.HttpResult
 import com.adityawidayanto.core.utils.Result
 import com.adityawidayanto.core.utils.test.CoroutineTestRule
-import com.adityawidayanto.core.utils.test.LifeCycleTestOwner
 import com.adityawidayanto.db.entity.Movie
 import com.adityawidayanto.movies.data.response.MovieListBean
 import com.adityawidayanto.movies.domain.usecase.MovieUseCase
@@ -31,15 +30,8 @@ class PopularMovieViewModelTest {
     @get:Rule
     var rule: TestRule = InstantTaskExecutorRule()
 
-
-    private lateinit var lifecycleOwner: LifeCycleTestOwner
-
     @Mock
     private lateinit var movieUseCase: MovieUseCase
-
-    @Mock
-    private lateinit var observer: Observer<Result<List<Movie>>>
-//===========///
 
     @Mock
     lateinit var result: Observer<List<Movie>>
@@ -67,13 +59,13 @@ class PopularMovieViewModelTest {
 
     private val moviesData = MovieListBean(movies)
 
-    private val schedulerProvider = CoroutineTestRule().testDispatcherProvider.unconfined
+    private val provider = CoroutineTestRule().testDispatcherProvider.unconfined
 
 
     @Before
     fun setUp() {
         MockitoAnnotations.initMocks(this)
-        Dispatchers.setMain(schedulerProvider)
+        Dispatchers.setMain(provider)
 
         viewModel = PopularMovieViewModel(movieUseCase)
         viewModel.movieList.observeForever(result)
@@ -92,7 +84,7 @@ class PopularMovieViewModelTest {
 
 
     @Test
-    fun `should return an error without api key`() = runBlocking {
+    fun `should return an error bad response`() = runBlocking {
         val returnValue = Result.Error(HttpResult.BAD_RESPONSE, 400, "Bad Response")
         `when`(movieUseCase.invoke()).thenReturn(returnValue)
         viewModel.getPopularMovie()

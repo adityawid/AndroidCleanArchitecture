@@ -4,6 +4,7 @@ import com.adityawidayanto.core.BuildConfig
 import com.adityawidayanto.core.di.CoreScope
 import com.adityawidayanto.movies.data.MovieApi
 import com.adityawidayanto.movies.data.remote.MovieRemoteDataSource
+import com.adityawidayanto.movies.data.remote.tvshow.TvShowRemoteDataSource
 import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit
@@ -17,7 +18,14 @@ class MovieModule {
 
     @Provides
     @CoreScope
-    fun provideRemoteDataSource(characterService: MovieApi) = MovieRemoteDataSource(
+    fun provideMovieRemoteDataSource(characterService: MovieApi) = MovieRemoteDataSource(
+        characterService,
+        BuildConfig.API_KEY
+    )
+
+    @Provides
+    @CoreScope
+    fun provideTvShowRemoteDataSource(characterService: MovieApi) = TvShowRemoteDataSource(
         characterService,
         BuildConfig.API_KEY
     )
