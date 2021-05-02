@@ -25,6 +25,7 @@ class CoreApp : MultiDexApplication() {
     override fun onCreate() {
         super.onCreate()
         initCoreDependencyInjection()
+        mContext = this
     }
 
     private fun initCoreDependencyInjection() {

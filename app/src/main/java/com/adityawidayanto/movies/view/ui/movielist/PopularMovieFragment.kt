@@ -1,28 +1,35 @@
 package com.adityawidayanto.movies.view.ui.movielist
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.Observer
+import com.adityawidayanto.core.CoreApp
+import com.adityawidayanto.core.ui.BaseFragment
 import com.adityawidayanto.movies.R
+import com.adityawidayanto.movies.databinding.PopularMovieFragmentBinding
+import com.adityawidayanto.movies.di.DaggerMovieComponent
 
-class PopularMovieFragment : Fragment() {
+class PopularMovieFragment : BaseFragment<PopularMovieFragmentBinding, PopularMovieViewModel>() {
 
-    private lateinit var viewModel: PopularMovieViewModel
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.popular_movie_fragment, container, false)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        registerObservers()
+        vm.getPopularMovie()
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(PopularMovieViewModel::class.java)
-        // TODO: Use the ViewModel
+    private fun registerObservers() {
+        vm.movieList.observe(viewLifecycleOwner, Observer { println("test Adit movielist : $it") })
     }
+
+    override fun getLayoutResourceId(): Int = R.layout.popular_movie_fragment
+
+    override fun initDaggerComponent() {
+        DaggerMovieComponent.builder().coreComponent(CoreApp.coreComponent(requireContext()))
+            .build()
+            .inject(this)
+    }
+
+    override fun getViewModelClass(): Class<PopularMovieViewModel> =
+        PopularMovieViewModel::class.java
 
 }
