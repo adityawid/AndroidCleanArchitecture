@@ -37,14 +37,17 @@ abstract class BaseFragment<out B : ViewDataBinding, V : ViewModel> : Fragment()
         mViewDataBinding =
             DataBindingUtil.inflate(inflater, getLayoutResourceId(), container, false)
         vm = factory.create(getViewModelClass())
-//        vm = ViewModelProviders.of(this, factory).get(getViewModelClass())
         mViewDataBinding.lifecycleOwner = this
         mViewDataBinding.executePendingBindings()
+        initView()
+        initObservers()
         return mViewDataBinding.root
     }
 
     @LayoutRes
     abstract fun getLayoutResourceId(): Int
     abstract fun initDaggerComponent()
+    abstract fun initObservers()
+    abstract fun initView()
     abstract fun getViewModelClass(): Class<V>
 }
