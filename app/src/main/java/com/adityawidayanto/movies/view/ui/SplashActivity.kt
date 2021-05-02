@@ -1,12 +1,11 @@
-package com.adityawidayanto.androidcleanarchitecture.view.ui
+package com.adityawidayanto.movies.view.ui
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import com.adityawidayanto.androidcleanarchitecture.R
-import com.adityawidayanto.androidcleanarchitecture.databinding.ActivitySplashBinding
+import androidx.appcompat.app.AppCompatActivity
+import com.adityawidayanto.movies.databinding.ActivitySplashBinding
 
 class SplashActivity : AppCompatActivity() {
 
