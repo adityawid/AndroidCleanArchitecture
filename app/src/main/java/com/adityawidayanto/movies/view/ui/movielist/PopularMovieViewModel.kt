@@ -14,24 +14,24 @@ class PopularMovieViewModel @Inject constructor(
     private val movieUseCase: MovieUseCase
 ) : ViewModel() {
 
-    private val _movieList = MutableLiveData<Result<List<Movie>>>()
-    val movieList: LiveData<Result<List<Movie>>>
+    private val _movieList = MutableLiveData<List<Movie>>()
+    val movieList: LiveData<List<Movie>>
         get() = _movieList
 
     fun getPopularMovie() {
-        _movieList.value = Result.Loading
+//        _movieList.value = Result.Loading
         viewModelScope.launch {
             when (val result = movieUseCase()) {
                 is Result.Success -> {
                     println("test Adit vm resuls sukses $result")
 //                    _movieList.value = Result.Success(emptyList())
-                    _movieList.value = result
+                    _movieList.value = result.data.movies
                 }
                 is Result.Error -> {
                     println("test Adit vm resuls eror $result")
 
-                    _movieList.value =
-                        Result.Error(result.cause, result.code, result.errorMessage)
+//                    _movieList.value =
+//                        Result.Error(result.cause, result.code, result.errorMessage)
                 }
             }
         }
