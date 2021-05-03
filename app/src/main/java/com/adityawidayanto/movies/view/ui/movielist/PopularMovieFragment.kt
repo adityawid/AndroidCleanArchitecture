@@ -33,7 +33,9 @@ class PopularMovieFragment : BaseFragment<PopularMovieFragmentBinding, PopularMo
                         selected.overview,
                         selected.releaseDate,
                         selected.backdropPath,
-                        selected.popularity
+                        selected.popularity,
+                        selected.voteAverage,
+                        selected.voteCount
                     )
                 )
             )
@@ -42,7 +44,6 @@ class PopularMovieFragment : BaseFragment<PopularMovieFragmentBinding, PopularMo
 
     override fun initObservers() {
         vm.movieList.observe(viewLifecycleOwner, {
-            println("test Adit movielist : $it")
             adapter.setData(it)
             adapter.notifyDataSetChanged()
         })

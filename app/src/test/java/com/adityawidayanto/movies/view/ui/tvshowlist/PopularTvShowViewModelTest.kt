@@ -54,7 +54,11 @@ class PopularTvShowViewModelTest {
             1,
             "name",
             "overview",
-            "path"
+            "path",
+            "backDrop",
+            2000.1,
+            9.0,
+            50010
         )
     )
 

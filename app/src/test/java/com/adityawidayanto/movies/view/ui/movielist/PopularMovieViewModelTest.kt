@@ -54,6 +54,10 @@ class PopularMovieViewModelTest {
             "path",
             "release",
             "title",
+            "backDrop",
+            5000.1,
+            7.9,
+            2000
         )
     )
 

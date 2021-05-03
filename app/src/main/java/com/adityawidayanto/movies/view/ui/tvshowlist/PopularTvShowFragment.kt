@@ -30,7 +30,9 @@ class PopularTvShowFragment : BaseFragment<PopularTvShowFragmentBinding, Popular
                         selected.overview,
                         selected.firstAirDate,
                         selected.backdropPath,
-                        selected.popularity
+                        selected.popularity,
+                        selected.voteAverage,
+                        selected.voteCount
                     )
                 )
             )
@@ -48,7 +50,6 @@ class PopularTvShowFragment : BaseFragment<PopularTvShowFragmentBinding, Popular
 
     override fun initObservers() {
         vm.tvShowList.observe(viewLifecycleOwner, {
-            println("test Adit tvShowlist : $it")
             adapter.setData(it)
             adapter.notifyDataSetChanged()
         })

@@ -11,5 +11,7 @@ data class DetailBean(
     val overview: String,
     val releaseDate: String,
     val backDrop: String,
-    val popularity: Double
+    val popularity: Double,
+    val voteAverage: Double,
+    val voteCount: Int
 ) : Parcelable

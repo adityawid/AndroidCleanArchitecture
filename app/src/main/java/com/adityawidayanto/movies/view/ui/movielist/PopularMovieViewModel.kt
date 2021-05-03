@@ -27,11 +27,9 @@ class PopularMovieViewModel @Inject constructor(
             when (val result = movieUseCase()) {
 
                 is Result.Success -> {
-                    println("test Adit sukses " + result.data)
                     _movieList.value = result.data.movies
                 }
                 is Result.Error -> {
-                    println("test Adit error" + result.errorMessage)
                     _error.value =
                         Result.Error(result.cause, result.code, result.errorMessage)
                 }
