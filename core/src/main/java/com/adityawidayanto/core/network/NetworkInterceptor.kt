@@ -13,8 +13,7 @@ class NetworkInterceptor : Interceptor {
             .addHeader(Constants.APP_ACCEPT, Constants.APP_CONTENT_TYPE_VAL)
 
         request = requestBuilder.build()
-        val response = chain.proceed(request)
-        return response
+        return chain.proceed(request)
     }
 
 }

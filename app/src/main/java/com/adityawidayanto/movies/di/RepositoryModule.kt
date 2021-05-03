@@ -1,6 +1,6 @@
 package com.adityawidayanto.movies.di
 
-import com.adityawidayanto.movies.data.remote.MovieRepositoryImpl
+import com.adityawidayanto.movies.data.remote.movie.MovieRepositoryImpl
 import com.adityawidayanto.movies.data.remote.tvshow.TvShowRepositoryImpl
 import com.adityawidayanto.movies.domain.repository.MovieRepository
 import com.adityawidayanto.movies.domain.repository.TvShowRepository

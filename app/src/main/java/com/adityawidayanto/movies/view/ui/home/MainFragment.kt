@@ -12,10 +12,6 @@ import com.google.android.material.tabs.TabLayoutMediator
 
 class MainFragment : Fragment() {
     lateinit var binding: FragmentMainBinding
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

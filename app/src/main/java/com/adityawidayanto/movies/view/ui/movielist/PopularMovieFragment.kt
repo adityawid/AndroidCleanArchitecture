@@ -6,7 +6,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.adityawidayanto.core.CoreApp
 import com.adityawidayanto.core.ui.BaseFragment
-import com.adityawidayanto.db.entity.Movie
 import com.adityawidayanto.movies.R
 import com.adityawidayanto.movies.data.bean.DetailBean
 import com.adityawidayanto.movies.databinding.PopularMovieFragmentBinding
@@ -15,7 +14,6 @@ import com.adityawidayanto.movies.view.ui.home.MainFragmentDirections
 
 class PopularMovieFragment : BaseFragment<PopularMovieFragmentBinding, PopularMovieViewModel>() {
 
-    private var movieData = arrayListOf<Movie>()
     private val adapter: MovieAdapter by lazy {
         MovieAdapter()
     }

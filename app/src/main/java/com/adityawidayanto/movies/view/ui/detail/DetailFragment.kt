@@ -1,6 +1,5 @@
 package com.adityawidayanto.movies.view.ui.detail
 
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
 import com.adityawidayanto.core.CoreApp
 import com.adityawidayanto.core.ui.BaseFragment
@@ -21,14 +20,10 @@ class DetailFragment : BaseFragment<DetailFragmentBinding, DetailViewModel>() {
     }
 
     override fun initObservers() {
-        vm.detail.observe(viewLifecycleOwner, Observer {
+        vm.detail.observe(viewLifecycleOwner, {
             if (it != null) {
                 val posterURL = "https://image.tmdb.org/t/p/w500" + it.poster
                 val backDropUrl = "https://image.tmdb.org/t/p/w500" + it.backDrop
-//
-//                binding.titleDetail.text = it.title
-//                binding.overview.text = it.overview
-//                binding.popularity.text = it.popularity.toString()
                 Glide.with(binding.posterTopBar.context)
                     .load(backDropUrl)
                     .into(binding.posterTopBar)

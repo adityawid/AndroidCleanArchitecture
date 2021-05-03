@@ -1,4 +1,4 @@
-package com.adityawidayanto.movies.data.remote
+package com.adityawidayanto.movies.data.remote.movie
 
 import com.adityawidayanto.core.data.remote.RemoteDataSource
 import com.adityawidayanto.core.utils.Result

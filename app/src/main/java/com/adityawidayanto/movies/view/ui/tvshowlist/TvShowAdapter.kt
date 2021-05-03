@@ -10,13 +10,13 @@ import com.adityawidayanto.movies.databinding.ItemMovieBinding
 import com.bumptech.glide.Glide
 
 class TvShowAdapter : RecyclerView.Adapter<TvShowAdapter.MyViewHolder>() {
-    private val movieList = ArrayList<TvShow>()
+    private val tvShowList = ArrayList<TvShow>()
     var onItemClick: ((TvShow) -> Unit)? = null
 
     fun setData(newListData: List<TvShow>?) {
         if (newListData == null) return
-        movieList.clear()
-        movieList.addAll(newListData)
+        tvShowList.clear()
+        tvShowList.addAll(newListData)
         notifyDataSetChanged()
     }
 
@@ -32,17 +32,17 @@ class TvShowAdapter : RecyclerView.Adapter<TvShowAdapter.MyViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        val data = movieList[position]
+        val data = tvShowList[position]
         holder.bind(data)
     }
 
-    override fun getItemCount(): Int = movieList.size
+    override fun getItemCount(): Int = tvShowList.size
 
     inner class MyViewHolder(val binding: ItemMovieBinding) :
         RecyclerView.ViewHolder(binding.root) {
         init {
             binding.root.setOnClickListener {
-                onItemClick?.invoke(movieList[adapterPosition])
+                onItemClick?.invoke(tvShowList[adapterPosition])
             }
         }
 

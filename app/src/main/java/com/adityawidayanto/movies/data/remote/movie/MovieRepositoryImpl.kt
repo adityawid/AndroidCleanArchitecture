@@ -1,4 +1,4 @@
-package com.adityawidayanto.movies.data.remote
+package com.adityawidayanto.movies.data.remote.movie
 
 import com.adityawidayanto.core.utils.Result
 import com.adityawidayanto.core.utils.dispatcher.DispatcherProvider
