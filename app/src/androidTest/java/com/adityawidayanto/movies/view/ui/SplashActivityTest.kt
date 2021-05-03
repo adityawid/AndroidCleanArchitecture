@@ -22,7 +22,7 @@ class SplashActivityTest {
         onView(withId(R.id.splash_text_view))
             .check(matches(ViewMatchers.isDisplayed()))
         onView(withId(R.id.splash_text_view)).check(matches(withText("Movie Tv SHow")))
-        Thread.sleep(3000)
+        Thread.sleep(10000)
         onView(withId(R.id.rv_movie_list))
             .check(matches(ViewMatchers.isDisplayed()))
         onView(withId(R.id.rv_movie_list))
@@ -32,7 +32,10 @@ class SplashActivityTest {
 
     @Test
     fun clickItem() {
-        Thread.sleep(3000)
+        onView(withId(R.id.splash_text_view))
+            .check(matches(ViewMatchers.isDisplayed()))
+        onView(withId(R.id.splash_text_view)).check(matches(withText("Movie Tv SHow")))
+        Thread.sleep(10000)
         onView(withId(R.id.rv_movie_list)).check(matches(ViewMatchers.isDisplayed()))
         onView(withId(R.id.rv_movie_list)).perform(
             RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(
