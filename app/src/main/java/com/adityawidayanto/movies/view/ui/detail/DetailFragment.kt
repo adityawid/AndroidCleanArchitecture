@@ -24,18 +24,25 @@ class DetailFragment : BaseFragment<DetailFragmentBinding, DetailViewModel>() {
         vm.detail.observe(viewLifecycleOwner, Observer {
             if (it != null) {
                 val posterURL = "https://image.tmdb.org/t/p/w500" + it.poster
-
-                binding.titleDetail.text = it.title
-                binding.overview.text = it.overview
+                val backDropUrl = "https://image.tmdb.org/t/p/w500" + it.backDrop
+//
+//                binding.titleDetail.text = it.title
+//                binding.overview.text = it.overview
+//                binding.popularity.text = it.popularity.toString()
                 Glide.with(binding.posterTopBar.context)
-                    .load(posterURL)
+                    .load(backDropUrl)
                     .into(binding.posterTopBar)
+
+                Glide.with(binding.subPoster.context)
+                    .load(posterURL)
+                    .into(binding.subPoster)
             }
         })
     }
 
     override fun initView() {
         vm.initDetail(args.detail)
+        binding.viewModel = vm
     }
 
     override fun getViewModelClass(): Class<DetailViewModel> = DetailViewModel::class.java

@@ -8,5 +8,8 @@ data class DetailBean(
     val id: Int,
     val title: String,
     val poster: String,
-    val overview: String
+    val overview: String,
+    val releaseDate: String,
+    val backDrop: String,
+    val popularity: Double
 ) : Parcelable

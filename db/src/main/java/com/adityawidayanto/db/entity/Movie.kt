@@ -19,5 +19,9 @@ data class Movie(
     @SerializedName("release_date")
     val releaseDate: String,
     @SerializedName("title")
-    val title: String
+    val title: String,
+    @SerializedName("backdrop_path")
+    val backdropPath: String,
+    @SerializedName("popularity")
+    val popularity: Double
 ) : Parcelable

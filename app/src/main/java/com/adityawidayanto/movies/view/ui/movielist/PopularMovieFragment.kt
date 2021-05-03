@@ -2,7 +2,6 @@ package com.adityawidayanto.movies.view.ui.movielist
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.adityawidayanto.core.CoreApp
@@ -27,10 +26,17 @@ class PopularMovieFragment : BaseFragment<PopularMovieFragmentBinding, PopularMo
         adapter.onItemClick = { selected ->
             findNavController().navigate(
                 MainFragmentDirections.actionMainFragmentToDetailFragment(
-                    DetailBean(selected.id, selected.title, selected.posterPath, selected.overview)
+                    DetailBean(
+                        selected.id,
+                        selected.title,
+                        selected.posterPath,
+                        selected.overview,
+                        selected.releaseDate,
+                        selected.backdropPath,
+                        selected.popularity
+                    )
                 )
             )
-            Toast.makeText(context, "judul " + selected.title, Toast.LENGTH_SHORT).show()
         }
     }
 

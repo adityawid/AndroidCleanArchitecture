@@ -5,7 +5,6 @@
     tools:context=".view.ui.detail.DetailFragment">
 
     <data>
-
         <variable
             name="viewModel"
             type="com.adityawidayanto.movies.view.ui.detail.DetailViewModel" />
@@ -40,11 +39,6 @@
                         android:scaleType="centerCrop"
                         android:src="@drawable/ic_launcher_foreground" />
 
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:src="@drawable/ic_placeholder" />
-
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
@@ -56,7 +50,7 @@
                             android:layout_marginStart="16dp"
                             android:layout_marginEnd="16dp"
                             android:layout_marginBottom="16dp"
-                            android:text="Title"
+                            android:text="@{viewModel.detail.title}"
                             android:textAlignment="textEnd"
                             android:textColor="@color/white"
                             android:textSize="24sp"
@@ -71,7 +65,7 @@
                             android:layout_marginStart="16dp"
                             android:layout_marginEnd="16dp"
                             android:layout_marginBottom="16dp"
-                            android:text="10 April 2021"
+                            android:text="@{viewModel.detail.releaseDate}"
                             android:textAlignment="textEnd"
                             android:textColor="@color/white"
                             app:layout_constraintBottom_toBottomOf="parent"
@@ -114,7 +108,7 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
                 android:backgroundTint="@color/design_default_color_primary"
-                android:src="@drawable/ic_placeholder"
+                android:src="@drawable/ic_favorite"
                 android:tint="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/topBarCardView"
@@ -155,6 +149,7 @@
                 android:textColor="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
+                android:text="@{viewModel.detail.overview}"
                 app:layout_constraintTop_toBottomOf="@+id/dividerBody"
                 tools:text="@string/overview" />
 
@@ -192,7 +187,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="16dp"
-                android:text="Popularity"
+                android:text="@{String.valueOf(viewModel.detail.popularity)}"
                 android:textColor="@color/white"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
