@@ -9,12 +9,13 @@ import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
-import org.mockito.Mockito
+import org.mockito.Mockito.`when`
+import org.mockito.Mockito.mock
 
 @ExperimentalCoroutinesApi
 class TvShowUseCaseTest {
 
-    private var repository = Mockito.mock(TvShowRepository::class.java)
+    private var repository = mock(TvShowRepository::class.java)
     private lateinit var useCase: TvShowUseCase
 
     @Before
@@ -42,10 +43,10 @@ class TvShowUseCaseTest {
     }
 
     @Test
-    fun `should show movie list response`() {
+    fun `should show tv show list response`() {
         val returnValue = Result.Success(tvShowList)
         val request = runBlocking {
-            Mockito.`when`(repository.getPopularTvShow(1, 10)).thenReturn(
+            `when`(repository.getPopularTvShow(1, 10)).thenReturn(
                 Result.Success(tvShowList)
             )
             useCase.invoke()
