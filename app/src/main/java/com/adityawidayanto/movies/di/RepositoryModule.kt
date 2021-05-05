@@ -1,7 +1,7 @@
 package com.adityawidayanto.movies.di
 
-import com.adityawidayanto.movies.data.remote.movie.MovieRepositoryImpl
-import com.adityawidayanto.movies.data.remote.tvshow.TvShowRepositoryImpl
+import com.adityawidayanto.movies.data.repository.MovieRepositoryImpl
+import com.adityawidayanto.movies.data.repository.TvShowRepositoryImpl
 import com.adityawidayanto.movies.domain.repository.MovieRepository
 import com.adityawidayanto.movies.domain.repository.TvShowRepository
 import dagger.Binds

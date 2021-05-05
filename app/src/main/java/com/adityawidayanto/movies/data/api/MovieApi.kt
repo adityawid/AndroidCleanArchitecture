@@ -1,7 +1,7 @@
-package com.adityawidayanto.movies.data
+package com.adityawidayanto.movies.data.api
 
-import com.adityawidayanto.movies.data.response.MovieListBean
-import com.adityawidayanto.movies.data.response.TvShowListBean
+import com.adityawidayanto.movies.data.bean.responses.MovieListBean
+import com.adityawidayanto.movies.data.bean.responses.TvShowListBean
 import retrofit2.http.GET
 import retrofit2.http.Query
 

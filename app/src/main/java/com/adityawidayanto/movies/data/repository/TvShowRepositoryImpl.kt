@@ -1,8 +1,9 @@
-package com.adityawidayanto.movies.data.remote.tvshow
+package com.adityawidayanto.movies.data.repository
 
 import com.adityawidayanto.core.utils.Result
 import com.adityawidayanto.core.utils.dispatcher.DispatcherProvider
-import com.adityawidayanto.movies.data.response.TvShowListBean
+import com.adityawidayanto.movies.data.bean.responses.TvShowListBean
+import com.adityawidayanto.movies.data.repository.tvshow.TvShowRemoteDataSource
 import com.adityawidayanto.movies.domain.repository.TvShowRepository
 import javax.inject.Inject
 

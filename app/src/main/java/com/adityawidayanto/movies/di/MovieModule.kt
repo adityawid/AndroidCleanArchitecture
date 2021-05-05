@@ -2,9 +2,9 @@ package com.adityawidayanto.movies.di
 
 import com.adityawidayanto.core.BuildConfig
 import com.adityawidayanto.core.di.CoreScope
-import com.adityawidayanto.movies.data.MovieApi
-import com.adityawidayanto.movies.data.remote.movie.MovieRemoteDataSource
-import com.adityawidayanto.movies.data.remote.tvshow.TvShowRemoteDataSource
+import com.adityawidayanto.movies.data.api.MovieApi
+import com.adityawidayanto.movies.data.repository.movie.MovieRemoteDataSource
+import com.adityawidayanto.movies.data.repository.tvshow.TvShowRemoteDataSource
 import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit

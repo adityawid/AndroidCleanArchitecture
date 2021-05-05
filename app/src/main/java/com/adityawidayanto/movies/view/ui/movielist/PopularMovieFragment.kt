@@ -20,6 +20,7 @@ class PopularMovieFragment : BaseFragment<PopularMovieFragmentBinding, PopularMo
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.progressBar.visibility = View.VISIBLE
         vm.getPopularMovie()
         adapter.onItemClick = { selected ->
             findNavController().navigate(
@@ -44,6 +45,8 @@ class PopularMovieFragment : BaseFragment<PopularMovieFragmentBinding, PopularMo
         vm.movieList.observe(viewLifecycleOwner, {
             adapter.setData(it)
             adapter.notifyDataSetChanged()
+            binding.progressBar.visibility = View.GONE
+
         })
     }
 

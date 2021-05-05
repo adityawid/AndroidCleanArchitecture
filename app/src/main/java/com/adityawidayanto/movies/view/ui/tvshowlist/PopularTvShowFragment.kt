@@ -19,6 +19,7 @@ class PopularTvShowFragment : BaseFragment<PopularTvShowFragmentBinding, Popular
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.progressBar.visibility = View.VISIBLE
         vm.getPopularTvShow()
         adapter.onItemClick = { selected ->
             findNavController().navigate(
@@ -52,6 +53,7 @@ class PopularTvShowFragment : BaseFragment<PopularTvShowFragmentBinding, Popular
         vm.tvShowList.observe(viewLifecycleOwner, {
             adapter.setData(it)
             adapter.notifyDataSetChanged()
+            binding.progressBar.visibility = View.GONE
         })
     }
 

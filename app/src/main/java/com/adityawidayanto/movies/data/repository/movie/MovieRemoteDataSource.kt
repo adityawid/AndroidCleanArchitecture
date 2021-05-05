@@ -1,9 +1,9 @@
-package com.adityawidayanto.movies.data.remote.movie
+package com.adityawidayanto.movies.data.repository.movie
 
 import com.adityawidayanto.core.data.remote.RemoteDataSource
 import com.adityawidayanto.core.utils.Result
-import com.adityawidayanto.movies.data.MovieApi
-import com.adityawidayanto.movies.data.response.MovieListBean
+import com.adityawidayanto.movies.data.api.MovieApi
+import com.adityawidayanto.movies.data.bean.responses.MovieListBean
 import kotlinx.coroutines.CoroutineDispatcher
 
 class MovieRemoteDataSource(private val movieApi: MovieApi, private val apiKey: String) :

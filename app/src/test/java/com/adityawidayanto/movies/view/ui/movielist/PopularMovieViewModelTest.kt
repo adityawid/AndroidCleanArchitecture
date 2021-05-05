@@ -6,7 +6,7 @@ import com.adityawidayanto.core.network.HttpResult
 import com.adityawidayanto.core.utils.Result
 import com.adityawidayanto.core.utils.test.CoroutineTestRule
 import com.adityawidayanto.db.entity.Movie
-import com.adityawidayanto.movies.data.response.MovieListBean
+import com.adityawidayanto.movies.data.bean.responses.MovieListBean
 import com.adityawidayanto.movies.domain.usecase.MovieUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi

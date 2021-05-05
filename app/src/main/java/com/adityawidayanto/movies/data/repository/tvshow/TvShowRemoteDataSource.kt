@@ -1,9 +1,9 @@
-package com.adityawidayanto.movies.data.remote.tvshow
+package com.adityawidayanto.movies.data.repository.tvshow
 
 import com.adityawidayanto.core.data.remote.RemoteDataSource
 import com.adityawidayanto.core.utils.Result
-import com.adityawidayanto.movies.data.MovieApi
-import com.adityawidayanto.movies.data.response.TvShowListBean
+import com.adityawidayanto.movies.data.api.MovieApi
+import com.adityawidayanto.movies.data.bean.responses.TvShowListBean
 import kotlinx.coroutines.CoroutineDispatcher
 
 class TvShowRemoteDataSource(private val movieApi: MovieApi, private val apiKey: String) :

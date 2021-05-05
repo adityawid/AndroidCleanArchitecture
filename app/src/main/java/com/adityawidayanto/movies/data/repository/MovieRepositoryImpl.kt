@@ -1,8 +1,9 @@
-package com.adityawidayanto.movies.data.remote.movie
+package com.adityawidayanto.movies.data.repository
 
 import com.adityawidayanto.core.utils.Result
 import com.adityawidayanto.core.utils.dispatcher.DispatcherProvider
-import com.adityawidayanto.movies.data.response.MovieListBean
+import com.adityawidayanto.movies.data.bean.responses.MovieListBean
+import com.adityawidayanto.movies.data.repository.movie.MovieRemoteDataSource
 import com.adityawidayanto.movies.domain.repository.MovieRepository
 import javax.inject.Inject
 

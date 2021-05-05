@@ -1,7 +1,7 @@
 package com.adityawidayanto.movies.domain.usecase
 
 import com.adityawidayanto.core.utils.Result
-import com.adityawidayanto.movies.data.response.MovieListBean
+import com.adityawidayanto.movies.data.bean.responses.MovieListBean
 import com.adityawidayanto.movies.domain.repository.MovieRepository
 import javax.inject.Inject
 

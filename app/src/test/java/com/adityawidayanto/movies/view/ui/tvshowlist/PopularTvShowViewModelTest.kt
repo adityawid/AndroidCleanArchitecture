@@ -6,7 +6,7 @@ import com.adityawidayanto.core.network.HttpResult
 import com.adityawidayanto.core.utils.Result
 import com.adityawidayanto.core.utils.test.CoroutineTestRule
 import com.adityawidayanto.db.entity.TvShow
-import com.adityawidayanto.movies.data.response.TvShowListBean
+import com.adityawidayanto.movies.data.bean.responses.TvShowListBean
 import com.adityawidayanto.movies.domain.usecase.TvShowUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
