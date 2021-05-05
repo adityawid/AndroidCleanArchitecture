@@ -6,6 +6,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.adityawidayanto.core.CoreApp
 import com.adityawidayanto.core.ui.BaseFragment
+import com.adityawidayanto.core.utils.test.EspressoIdlingResource
 import com.adityawidayanto.movies.R
 import com.adityawidayanto.movies.data.bean.DetailBean
 import com.adityawidayanto.movies.databinding.PopularMovieFragmentBinding
@@ -20,7 +21,11 @@ class PopularMovieFragment : BaseFragment<PopularMovieFragmentBinding, PopularMo
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.progressBar.visibility = View.VISIBLE
+        println("test Adit attach")
+        EspressoIdlingResource.increment()
+        binding.movieProgressBar.visibility = View.VISIBLE
+        println("test Adit idling movie incre")
+
         vm.getPopularMovie()
         adapter.onItemClick = { selected ->
             findNavController().navigate(
@@ -43,9 +48,15 @@ class PopularMovieFragment : BaseFragment<PopularMovieFragmentBinding, PopularMo
 
     override fun initObservers() {
         vm.movieList.observe(viewLifecycleOwner, {
-            adapter.setData(it)
-            adapter.notifyDataSetChanged()
-            binding.progressBar.visibility = View.GONE
+            if (it != null) {
+                binding.movieProgressBar.visibility = View.GONE
+                if (!EspressoIdlingResource.idlingResource.isIdleNow) {
+                    EspressoIdlingResource.decrement()
+                    println("test Adit idling movie decrement")
+                }
+                adapter.setData(it)
+                adapter.notifyDataSetChanged()
+            }
 
         })
     }

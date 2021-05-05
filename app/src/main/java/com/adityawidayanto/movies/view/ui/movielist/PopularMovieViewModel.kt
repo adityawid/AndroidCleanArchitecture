@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.adityawidayanto.core.utils.Result
+import com.adityawidayanto.core.utils.test.EspressoIdlingResource
 import com.adityawidayanto.db.entity.Movie
 import com.adityawidayanto.movies.domain.usecase.MovieUseCase
 import kotlinx.coroutines.launch
@@ -33,6 +34,10 @@ class PopularMovieViewModel @Inject constructor(
                     _error.value =
                         Result.Error(result.cause, result.code, result.errorMessage)
                 }
+            }
+            if (!EspressoIdlingResource.idlingResource.isIdleNow) {
+                //Memberitahukan bahwa tugas sudah selesai dijalankan
+                EspressoIdlingResource.decrement()
             }
         }
     }

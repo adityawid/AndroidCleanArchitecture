@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.adityawidayanto.core.utils.Result
+import com.adityawidayanto.core.utils.test.EspressoIdlingResource
 import com.adityawidayanto.db.entity.TvShow
 import com.adityawidayanto.movies.domain.usecase.TvShowUseCase
 import kotlinx.coroutines.launch
@@ -25,6 +26,7 @@ class PopularTvShowViewModel @Inject constructor(
 
     fun getPopularTvShow() {
         viewModelScope.launch {
+            EspressoIdlingResource.increment()
             when (val result = useCase()) {
                 is Result.Success -> {
                     _tvShowList.value = result.data.tvShows
@@ -34,6 +36,8 @@ class PopularTvShowViewModel @Inject constructor(
                         Result.Error(result.cause, result.code, result.errorMessage)
                 }
             }
+            EspressoIdlingResource.decrement()
+
         }
     }
 }
