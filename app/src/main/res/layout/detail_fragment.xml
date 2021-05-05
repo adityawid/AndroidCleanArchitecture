@@ -36,6 +36,7 @@
                         android:id="@+id/posterTopBar"
                         android:layout_width="match_parent"
                         android:layout_height="350dp"
+                        android:contentDescription="@string/poster"
                         android:background="@drawable/ic_launcher_background"
                         android:scaleType="centerCrop"
                         android:src="@drawable/ic_launcher_foreground" />

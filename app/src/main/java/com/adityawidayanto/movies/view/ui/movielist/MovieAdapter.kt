@@ -38,11 +38,11 @@ class MovieAdapter : RecyclerView.Adapter<MovieAdapter.MyViewHolder>() {
 
     override fun getItemCount(): Int = movieList.size
 
-    inner class MyViewHolder(val binding: ItemMovieBinding) :
+    inner class MyViewHolder(private val binding: ItemMovieBinding) :
         RecyclerView.ViewHolder(binding.root) {
         init {
             binding.root.setOnClickListener {
-                onItemClick?.invoke(movieList[adapterPosition])
+                onItemClick?.invoke(movieList[absoluteAdapterPosition])
             }
         }
 
