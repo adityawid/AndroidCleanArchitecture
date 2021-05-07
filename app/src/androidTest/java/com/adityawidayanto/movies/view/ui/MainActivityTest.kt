@@ -6,7 +6,8 @@ import androidx.test.espresso.IdlingRegistry
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.action.ViewActions.swipeLeft
 import androidx.test.espresso.assertion.ViewAssertions.matches
-import androidx.test.espresso.contrib.RecyclerViewActions
+import androidx.test.espresso.contrib.RecyclerViewActions.actionOnItemAtPosition
+import androidx.test.espresso.contrib.RecyclerViewActions.scrollToPosition
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import com.adityawidayanto.core.utils.test.EspressoIdlingResource
@@ -29,12 +30,12 @@ class MainActivityTest {
     fun clickItemMovie() {
         onView(withId(R.id.rv_movie_list)).check(matches(isDisplayed()))
         onView(withId(R.id.rv_movie_list)).perform(
-            RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(
+            scrollToPosition<RecyclerView.ViewHolder>(
                 10
             )
         )
         onView(withId(R.id.rv_movie_list)).perform(
-            RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(
+            actionOnItemAtPosition<RecyclerView.ViewHolder>(
                 10,
                 click()
             )
@@ -51,12 +52,12 @@ class MainActivityTest {
         onView(withId(R.id.view_pager)).perform(swipeLeft());
         onView(withId(R.id.rv_list)).check(matches(isDisplayed()))
         onView(withId(R.id.rv_list)).perform(
-            RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(
+            scrollToPosition<RecyclerView.ViewHolder>(
                 10
             )
         )
         onView(withId(R.id.rv_list)).perform(
-            RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(
+            actionOnItemAtPosition<RecyclerView.ViewHolder>(
                 10,
                 click()
             )
