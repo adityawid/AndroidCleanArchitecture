@@ -21,11 +21,8 @@ class PopularMovieFragment : BaseFragment<PopularMovieFragmentBinding, PopularMo
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        println("test Adit attach")
         EspressoIdlingResource.increment()
         binding.movieProgressBar.visibility = View.VISIBLE
-        println("test Adit idling movie incre")
-
         vm.getPopularMovie()
         adapter.onItemClick = { selected ->
             findNavController().navigate(
@@ -52,7 +49,6 @@ class PopularMovieFragment : BaseFragment<PopularMovieFragmentBinding, PopularMo
                 binding.movieProgressBar.visibility = View.GONE
                 if (!EspressoIdlingResource.idlingResource.isIdleNow) {
                     EspressoIdlingResource.decrement()
-                    println("test Adit idling movie decrement")
                 }
                 adapter.setData(it)
                 adapter.notifyDataSetChanged()

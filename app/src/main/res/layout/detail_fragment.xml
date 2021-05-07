@@ -58,7 +58,7 @@
                             android:textSize="24sp"
                             app:layout_constraintBottom_toTopOf="@+id/date"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toEndOf="@+id/roundedImageView" />
+                            app:layout_constraintStart_toEndOf="@+id/border_view" />
 
                         <TextView
                             android:id="@+id/date"
@@ -72,7 +72,7 @@
                             android:textColor="@color/white"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toEndOf="@+id/roundedImageView" />
+                            app:layout_constraintStart_toEndOf="@+id/border_view" />
 
                         <View
                             android:id="@+id/border_view"
@@ -96,7 +96,7 @@
                 android:layout_marginStart="16dp"
                 android:adjustViewBounds="true"
                 android:background="@drawable/ic_launcher_background"
-                android:contentDescription="poster"
+                android:contentDescription="@string/poster_desc"
                 android:elevation="10dp"
                 android:src="@drawable/ic_placeholder"
                 app:layout_constraintBottom_toBottomOf="@+id/topBarCardView"
@@ -124,7 +124,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
-                android:text="Vote Average : "
+                android:text="@string/vote_average"
                 android:textColor="@color/white"
                 android:textSize="16sp"
                 app:layout_constraintStart_toEndOf="@id/subPoster"
@@ -151,7 +151,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
-                android:text="Vote Count : "
+                android:text="@string/vote_count"
                 android:textColor="@color/white"
                 android:textSize="16sp"
                 app:layout_constraintStart_toEndOf="@id/subPoster"
@@ -178,7 +178,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
-                android:text="Overview"
+                android:text="@string/overview_title"
                 android:textColor="@color/white"
                 android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -214,7 +214,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
-                android:text="Popularity"
+                android:text="@string/popularity_title"
                 android:textColor="@color/white"
                 android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="parent"

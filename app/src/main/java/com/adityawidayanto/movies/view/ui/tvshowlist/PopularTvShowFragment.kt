@@ -6,6 +6,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.adityawidayanto.core.CoreApp
 import com.adityawidayanto.core.ui.BaseFragment
+import com.adityawidayanto.core.utils.test.EspressoIdlingResource
 import com.adityawidayanto.movies.R
 import com.adityawidayanto.movies.data.bean.DetailBean
 import com.adityawidayanto.movies.databinding.PopularTvShowFragmentBinding
@@ -19,6 +20,7 @@ class PopularTvShowFragment : BaseFragment<PopularTvShowFragmentBinding, Popular
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        EspressoIdlingResource.increment()
         binding.progressBar.visibility = View.VISIBLE
         vm.getPopularTvShow()
         adapter.onItemClick = { selected ->
@@ -51,9 +53,14 @@ class PopularTvShowFragment : BaseFragment<PopularTvShowFragmentBinding, Popular
 
     override fun initObservers() {
         vm.tvShowList.observe(viewLifecycleOwner, {
-            adapter.setData(it)
-            adapter.notifyDataSetChanged()
-            binding.progressBar.visibility = View.GONE
+            if (it != null) {
+                binding.progressBar.visibility = View.GONE
+                if (!EspressoIdlingResource.idlingResource.isIdleNow) {
+                    EspressoIdlingResource.decrement()
+                }
+                adapter.setData(it)
+                adapter.notifyDataSetChanged()
+            }
         })
     }
 
