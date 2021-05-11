@@ -29,6 +29,12 @@ abstract class BaseFragment<out B : ViewDataBinding, V : ViewModel> : Fragment()
         super.onAttach(context)
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initView()
+        initObservers()
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -39,8 +45,6 @@ abstract class BaseFragment<out B : ViewDataBinding, V : ViewModel> : Fragment()
         vm = factory.create(getViewModelClass())
         mViewDataBinding.lifecycleOwner = this
         mViewDataBinding.executePendingBindings()
-        initView()
-        initObservers()
         return mViewDataBinding.root
     }
 

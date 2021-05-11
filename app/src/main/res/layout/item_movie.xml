@@ -38,7 +38,7 @@
                 android:id="@+id/imageView"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:contentDescription="avatar"
+                android:contentDescription="@string/poster"
                 app:layout_constraintBottom_toBottomOf="@id/cl_container"
                 app:layout_constraintStart_toStartOf="@id/cl_container"
                 app:layout_constraintTop_toTopOf="@id/cl_container"
