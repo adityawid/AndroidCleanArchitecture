@@ -2,6 +2,8 @@ package com.adityawidayanto.movies.di
 
 import com.adityawidayanto.core.BuildConfig
 import com.adityawidayanto.core.di.CoreScope
+import com.adityawidayanto.db.MovieDatabase
+import com.adityawidayanto.db.dao.MovieDao
 import com.adityawidayanto.movies.data.api.MovieApi
 import com.adityawidayanto.movies.data.repository.movie.MovieRemoteDataSource
 import com.adityawidayanto.movies.data.repository.tvshow.TvShowRemoteDataSource
@@ -11,6 +13,10 @@ import retrofit2.Retrofit
 
 @Module
 class MovieModule {
+
+    @Provides
+    @CoreScope
+    fun provideMovieDao(db: MovieDatabase): MovieDao = db.movieDao()
 
     @Provides
     @CoreScope
