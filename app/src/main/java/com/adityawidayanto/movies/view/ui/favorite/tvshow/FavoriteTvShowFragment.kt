@@ -1,32 +1,37 @@
 package com.adityawidayanto.movies.view.ui.favorite.tvshow
 
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.adityawidayanto.core.CoreApp
+import com.adityawidayanto.core.ui.BaseFragment
 import com.adityawidayanto.movies.R
+import com.adityawidayanto.movies.databinding.FavoriteTvShowFragmentBinding
+import com.adityawidayanto.movies.di.DaggerMovieComponent
+import com.adityawidayanto.movies.view.ui.tvshowlist.TvShowAdapter
 
-class FavoriteTvShowFragment : Fragment() {
+class FavoriteTvShowFragment :
+    BaseFragment<FavoriteTvShowFragmentBinding, FavoriteTvShowViewModel>() {
 
-    companion object {
-        fun newInstance() = FavoriteTvShowFragment()
+    private val adapter: TvShowAdapter by lazy {
+        TvShowAdapter()
     }
 
-    private lateinit var viewModel: FavoriteTvShowViewModel
+    override fun getLayoutResourceId(): Int = R.layout.favorite_tv_show_fragment
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.favorite_tv_show_fragment, container, false)
+    override fun initDaggerComponent() {
+        DaggerMovieComponent.builder().coreComponent(CoreApp.coreComponent(requireContext()))
+            .build()
+            .inject(this)
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(FavoriteTvShowViewModel::class.java)
-        // TODO: Use the ViewModel
+    override fun initObservers() {
     }
+
+    override fun initView() {
+        binding.rvFavList.layoutManager = LinearLayoutManager(context)
+        binding.rvFavList.adapter = adapter
+    }
+
+    override fun getViewModelClass(): Class<FavoriteTvShowViewModel> =
+        FavoriteTvShowViewModel::class.java
 
 }

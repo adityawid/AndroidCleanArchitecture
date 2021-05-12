@@ -1,22 +1,20 @@
 package com.adityawidayanto.movies.data.repository.movie
 
-import com.adityawidayanto.core.data.remote.RemoteDataSource
-import com.adityawidayanto.core.utils.Result
-import com.adityawidayanto.movies.data.api.MovieApi
-import com.adityawidayanto.movies.data.bean.responses.MovieListBean
-import kotlinx.coroutines.CoroutineDispatcher
+import androidx.lifecycle.LiveData
+import com.adityawidayanto.db.MovieDao
+import com.adityawidayanto.db.entity.Movie
 
-class MovieLocalDataSource(private val movieApi: MovieApi, private val apiKey: String) :
-    RemoteDataSource() {
+class MovieLocalDataSource(private val movieDao: MovieDao) {
 
-    suspend fun getPopularMovies(
-        dispatcher: CoroutineDispatcher,
-        page: Int,
-        pageSize: Int
-    ): Result<MovieListBean> {
-        return safeApiCall(dispatcher) {
-            movieApi.getPopularMovies(apiKey, page)
-        }
+    suspend fun getFavoriteMovies(): LiveData<Movie> = movieDao.findAll()
+    suspend fun addFavoriteMovie(movie: Movie) {
+        movieDao.insert(movie)
     }
+
+    suspend fun deleteMovieFavorite(movie: Movie) {
+        movieDao.deleteFavorite(movie.id)
+    }
+
+    suspend fun checkMovieFavorite(movie: Movie): Int = movieDao.checkIdMovie(movie.id)
 
 }

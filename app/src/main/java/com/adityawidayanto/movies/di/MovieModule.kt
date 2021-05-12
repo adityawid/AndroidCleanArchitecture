@@ -6,6 +6,7 @@ import com.adityawidayanto.db.MovieDao
 import com.adityawidayanto.db.MovieDatabase
 import com.adityawidayanto.db.TvShowDao
 import com.adityawidayanto.movies.data.api.MovieApi
+import com.adityawidayanto.movies.data.repository.movie.MovieLocalDataSource
 import com.adityawidayanto.movies.data.repository.movie.MoviePagingSource
 import com.adityawidayanto.movies.data.repository.movie.MovieRemoteDataSource
 import com.adityawidayanto.movies.data.repository.tvshow.TvShowRemoteDataSource
@@ -50,4 +51,9 @@ class MovieModule {
     @CoreScope
     fun provideTvShowDao(db: MovieDatabase): TvShowDao = db.tvShowDao()
 
+    @Provides
+    @CoreScope
+    fun provideMovieLocalDataSource(movieDao: MovieDao) = MovieLocalDataSource(
+        movieDao
+    )
 }

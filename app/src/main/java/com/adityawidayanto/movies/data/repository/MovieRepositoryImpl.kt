@@ -7,9 +7,9 @@ import androidx.paging.PagingData
 import androidx.paging.liveData
 import com.adityawidayanto.core.utils.Result
 import com.adityawidayanto.core.utils.dispatcher.DispatcherProvider
-import com.adityawidayanto.db.MovieDao
 import com.adityawidayanto.db.entity.Movie
 import com.adityawidayanto.movies.data.bean.responses.MovieListBean
+import com.adityawidayanto.movies.data.repository.movie.MovieLocalDataSource
 import com.adityawidayanto.movies.data.repository.movie.MoviePagingSource
 import com.adityawidayanto.movies.data.repository.movie.MovieRemoteDataSource
 import com.adityawidayanto.movies.domain.repository.MovieRepository
@@ -19,7 +19,7 @@ class MovieRepositoryImpl @Inject constructor(
     private val dispatcher: DispatcherProvider,
     private val remoteDataSource: MovieRemoteDataSource,
     private val moviePagingSource: MoviePagingSource,
-    private val movieDao: MovieDao
+    private val movieLocalDataSource: MovieLocalDataSource
 ) : MovieRepository {
 
     override suspend fun getPopularMovie(
@@ -47,13 +47,13 @@ class MovieRepositoryImpl @Inject constructor(
     ).liveData
 
     override suspend fun addMovieFavorite(movie: Movie) {
-        movieDao.insert(movie)
+        movieLocalDataSource.addFavoriteMovie(movie)
     }
 
     override suspend fun deleteMovieFavorite(movie: Movie) {
-        movieDao.deleteFavorite(movie.id)
+        movieLocalDataSource.deleteMovieFavorite(movie)
     }
 
     override suspend fun checkMovieFavorite(movie: Movie): Int =
-        movieDao.checkIdMovie(movie.id)
+        movieLocalDataSource.checkMovieFavorite(movie)
 }
