@@ -22,7 +22,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.adityawidayanto.movies.view.ui.MainActivity" />
+        <activity
+            android:name="com.adityawidayanto.movies.view.ui.MainActivity"
+            android:windowSoftInputMode="adjustPan" />
 
         <meta-data
             android:name="APP_VERSION_CODE"

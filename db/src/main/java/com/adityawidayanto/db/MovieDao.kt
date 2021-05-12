@@ -1,5 +1,6 @@
 package com.adityawidayanto.db
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -17,8 +18,9 @@ abstract class MovieDao {
 
     @Query("SELECT count(*) FROM popular_movies WHERE id = :id")
     abstract suspend fun checkIdMovie(id: Int): Int
-//    @Query("SELECT * FROM popular_movies")
-//    abstract fun findAll(): DataSource.Factory<Int, Movie>
+
+    @Query("SELECT * FROM popular_movies")
+    abstract fun findAll(): LiveData<Movie>
 
     @Query("DELETE FROM popular_movies WHERE id = :id")
     abstract suspend fun deleteFavorite(id: Int)
