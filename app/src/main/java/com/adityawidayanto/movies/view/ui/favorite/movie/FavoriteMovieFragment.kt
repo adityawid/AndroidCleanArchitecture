@@ -1,32 +1,31 @@
 package com.adityawidayanto.movies.view.ui.favorite.movie
 
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.adityawidayanto.core.ui.BaseFragment
 import com.adityawidayanto.movies.R
+import com.adityawidayanto.movies.databinding.FavoriteMovieFragmentBinding
+import com.adityawidayanto.movies.view.ui.movielist.MovieAdapter
 
-class FavoriteMovieFragment : Fragment() {
+class FavoriteMovieFragment : BaseFragment<FavoriteMovieFragmentBinding, FavoriteMovieViewModel>() {
 
-    companion object {
-        fun newInstance() = FavoriteMovieFragment()
+    private val adapter: MovieAdapter by lazy {
+        MovieAdapter()
     }
 
-    private lateinit var viewModel: FavoriteMovieViewModel
+    override fun getLayoutResourceId(): Int = R.layout.favorite_movie_fragment
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.favorite_movie_fragment, container, false)
+    override fun initDaggerComponent() {
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(FavoriteMovieViewModel::class.java)
-        // TODO: Use the ViewModel
+    override fun initObservers() {
     }
+
+    override fun initView() {
+        binding.rvFavMovieList.layoutManager = LinearLayoutManager(context)
+        binding.rvFavMovieList.adapter = adapter
+    }
+
+    override fun getViewModelClass(): Class<FavoriteMovieViewModel> =
+        FavoriteMovieViewModel::class.java
 
 }

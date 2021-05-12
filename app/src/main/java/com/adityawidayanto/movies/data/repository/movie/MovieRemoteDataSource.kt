@@ -15,7 +15,7 @@ class MovieRemoteDataSource(private val movieApi: MovieApi, private val apiKey: 
         pageSize: Int
     ): Result<MovieListBean> {
         return safeApiCall(dispatcher) {
-            movieApi.getPopularMovies(apiKey)
+            movieApi.getPopularMovies(apiKey, page)
         }
     }
 

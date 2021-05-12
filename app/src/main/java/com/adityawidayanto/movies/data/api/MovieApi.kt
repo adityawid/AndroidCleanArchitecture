@@ -10,7 +10,10 @@ interface MovieApi {
     suspend fun getPopularMovies(
         @Query(
             "api_key"
-        ) apiKey: String
+        ) apiKey: String,
+        @Query(
+            "page"
+        ) page: Int
     ): MovieListBean
 
     @GET("tv/popular")

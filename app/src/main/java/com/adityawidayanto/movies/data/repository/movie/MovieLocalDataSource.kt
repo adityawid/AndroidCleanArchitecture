@@ -15,7 +15,7 @@ class MovieLocalDataSource(private val movieApi: MovieApi, private val apiKey: S
         pageSize: Int
     ): Result<MovieListBean> {
         return safeApiCall(dispatcher) {
-            movieApi.getPopularMovies(apiKey)
+            movieApi.getPopularMovies(apiKey, page)
         }
     }
 

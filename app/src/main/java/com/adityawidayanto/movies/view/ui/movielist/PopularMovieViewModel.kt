@@ -22,6 +22,7 @@ class PopularMovieViewModel @Inject constructor(
     val error: LiveData<Result.Error>
         get() = _error
 
+    val movies = movieUseCase.getPagingMovie()
     fun getPopularMovie() {
         viewModelScope.launch {
             when (val result = movieUseCase()) {
