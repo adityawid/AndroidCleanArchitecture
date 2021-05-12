@@ -6,6 +6,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.adityawidayanto.core.CoreApp
 import com.adityawidayanto.core.ui.BaseFragment
+import com.adityawidayanto.core.utils.Constants
 import com.adityawidayanto.movies.R
 import com.adityawidayanto.movies.data.bean.DetailBean
 import com.adityawidayanto.movies.databinding.PopularMovieFragmentBinding
@@ -63,7 +64,8 @@ class PopularMovieFragment : BaseFragment<PopularMovieFragmentBinding, PopularMo
                         selected.popularity,
                         selected.voteAverage,
                         selected.voteCount
-                    )
+                    ),
+                    Constants.POPULAR_MOVIE
                 )
             )
         }

@@ -6,6 +6,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.adityawidayanto.core.CoreApp
 import com.adityawidayanto.core.ui.BaseFragment
+import com.adityawidayanto.core.utils.Constants
 import com.adityawidayanto.core.utils.test.EspressoIdlingResource
 import com.adityawidayanto.movies.R
 import com.adityawidayanto.movies.data.bean.DetailBean
@@ -36,7 +37,8 @@ class PopularTvShowFragment : BaseFragment<PopularTvShowFragmentBinding, Popular
                         selected.popularity,
                         selected.voteAverage,
                         selected.voteCount
-                    )
+                    ),
+                    Constants.POPULAR_TVSHOW
                 )
             )
         }

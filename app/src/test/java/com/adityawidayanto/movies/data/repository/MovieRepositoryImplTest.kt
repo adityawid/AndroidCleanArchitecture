@@ -3,6 +3,7 @@ package com.adityawidayanto.movies.data.repository
 import com.adityawidayanto.core.utils.Result
 import com.adityawidayanto.core.utils.test.CoroutineTestRule
 import com.adityawidayanto.core.utils.test.runBlockingTest
+import com.adityawidayanto.db.MovieDao
 import com.adityawidayanto.db.entity.Movie
 import com.adityawidayanto.movies.data.bean.responses.MovieListBean
 import com.adityawidayanto.movies.data.repository.movie.MoviePagingSource
@@ -48,13 +49,16 @@ class MovieRepositoryImplTest {
 
     }
 
+    @Mock
+    lateinit var movieDao: MovieDao
     @Before
     fun setUp() {
         MockitoAnnotations.initMocks(this)
         repository = MovieRepositoryImpl(
             coroutineTestRule.testDispatcherProvider,
             remoteDataSource,
-            moviePagingSource
+            moviePagingSource,
+            movieDao = movieDao
         )
     }
 
