@@ -1,14 +1,21 @@
 package com.adityawidayanto.movies.domain.usecase
 
+import androidx.lifecycle.LiveData
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
+import androidx.paging.liveData
 import com.adityawidayanto.core.utils.Result.Success
 import com.adityawidayanto.db.entity.Movie
 import com.adityawidayanto.movies.data.bean.responses.MovieListBean
+import com.adityawidayanto.movies.data.repository.movie.MoviePagingSource
 import com.adityawidayanto.movies.domain.repository.MovieRepository
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
+import org.mockito.Mock
 import org.mockito.Mockito.`when`
 import org.mockito.Mockito.mock
 
@@ -17,6 +24,9 @@ class MovieUseCaseTest {
 
     private var repository = mock(MovieRepository::class.java)
     private lateinit var useCase: MovieUseCase
+
+    @Mock
+    lateinit var moviePagingSource: MoviePagingSource
 
     @Before
     fun setUp() {
@@ -52,5 +62,24 @@ class MovieUseCaseTest {
             useCase.invoke()
         }
         assertEquals(returnValue, request)
+    }
+
+    @Test
+    fun `should show movie paging list`() {
+        val resultValue: LiveData<PagingData<Movie>> = Pager(
+            config = PagingConfig(
+                pageSize = 5,
+                maxSize = 20,
+                enablePlaceholders = false
+            ),
+            pagingSourceFactory = { moviePagingSource }
+        ).liveData
+        val request = runBlocking {
+            `when`(repository.getPagingPopularMovie()).thenReturn(
+                resultValue
+            )
+            useCase.getPagingMovie()
+        }
+        assertEquals(resultValue, request)
     }
 }

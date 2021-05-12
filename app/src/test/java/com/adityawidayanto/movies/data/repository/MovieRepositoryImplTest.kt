@@ -5,6 +5,7 @@ import com.adityawidayanto.core.utils.test.CoroutineTestRule
 import com.adityawidayanto.core.utils.test.runBlockingTest
 import com.adityawidayanto.db.entity.Movie
 import com.adityawidayanto.movies.data.bean.responses.MovieListBean
+import com.adityawidayanto.movies.data.repository.movie.MoviePagingSource
 import com.adityawidayanto.movies.data.repository.movie.MovieRemoteDataSource
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.junit.Assert.assertEquals
@@ -24,6 +25,9 @@ class MovieRepositoryImplTest {
 
     @Mock
     lateinit var remoteDataSource: MovieRemoteDataSource
+
+    @Mock
+    lateinit var moviePagingSource: MoviePagingSource
 
     companion object {
         private val movies = listOf(
@@ -49,7 +53,8 @@ class MovieRepositoryImplTest {
         MockitoAnnotations.initMocks(this)
         repository = MovieRepositoryImpl(
             coroutineTestRule.testDispatcherProvider,
-            remoteDataSource
+            remoteDataSource,
+            moviePagingSource
         )
     }
 
@@ -65,8 +70,6 @@ class MovieRepositoryImplTest {
             ).thenReturn(returnValue)
             val response = repository.getPopularMovie(1, 10)
             assertEquals(returnValue, response)
-
-
         }
 
 }
