@@ -37,7 +37,8 @@ class MovieRepositoryImpl @Inject constructor(
 
     override fun getPagingPopularMovie(): LiveData<PagingData<Movie>> = Pager(
         config = PagingConfig(
-            pageSize = 5, maxSize = 20,
+            pageSize = 5,
+            maxSize = 20,
             enablePlaceholders = false
         ),
         pagingSourceFactory = { moviePagingSource }
