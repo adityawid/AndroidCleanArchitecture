@@ -85,7 +85,7 @@ class MovieRepositoryImplTest {
         }
 
     @Test
-    fun `insert Favorite movie from local db and get favorite movie is not empty`() =
+    fun `insert Favorite movie into local db and get favorite movie`() =
         coroutineTestRule.runBlockingTest {
             val returnValue = Pager(
                 config = PagingConfig(
@@ -113,21 +113,5 @@ class MovieRepositoryImplTest {
             assertEquals(returnValue, response)
         }
 
-    @Test
-    fun `favorite movie is empty`() =
-        coroutineTestRule.runBlockingTest {
-            val returnValue = Pager(
-                config = PagingConfig(
-                    pageSize = 10
-                ),
-                pagingSourceFactory = { movieDao.getAllFavMovie() }
-            ).liveData
-
-            `when`(
-                movieLocalDataSource.getFavMovies()
-            ).thenReturn(returnValue)
-            val response = repository.getPagingFavoriteMovie()
-            assertEquals(returnValue, response)
-        }
 
 }

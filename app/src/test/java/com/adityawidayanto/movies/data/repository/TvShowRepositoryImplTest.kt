@@ -1,5 +1,8 @@
 package com.adityawidayanto.movies.data.repository
 
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.liveData
 import com.adityawidayanto.core.utils.Result
 import com.adityawidayanto.core.utils.test.CoroutineTestRule
 import com.adityawidayanto.core.utils.test.runBlockingTest
@@ -75,6 +78,35 @@ class TvShowRepositoryImplTest {
             assertEquals(returnValue, response)
 
 
+        }
+
+    @Test
+    fun `insert Favorite tv show into local db and get favorite tv show`() =
+        coroutineTestRule.runBlockingTest {
+            val returnValue = Pager(
+                config = PagingConfig(
+                    pageSize = 10
+                ),
+                pagingSourceFactory = { tvShowDao.getAllFavTvShow() }
+            ).liveData
+            tvShowLocalDataSource.addFavoriteTvShow(
+                TvShow(
+                    "firstAirDate",
+                    1,
+                    "name",
+                    "overview",
+                    "path",
+                    "backDrop",
+                    2000.1,
+                    9.0,
+                    50010
+                )
+            )
+            `when`(
+                tvShowLocalDataSource.getFavTvShows()
+            ).thenReturn(returnValue)
+            val response = repository.getPagingFavoriteTvShow()
+            assertEquals(returnValue, response)
         }
 
 
