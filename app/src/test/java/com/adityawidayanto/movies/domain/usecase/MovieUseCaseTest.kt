@@ -6,8 +6,10 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.liveData
 import com.adityawidayanto.core.utils.Result.Success
+import com.adityawidayanto.db.MovieDao
 import com.adityawidayanto.db.entity.Movie
 import com.adityawidayanto.movies.data.bean.responses.MovieListBean
+import com.adityawidayanto.movies.data.repository.movie.MovieLocalDataSource
 import com.adityawidayanto.movies.data.repository.movie.MoviePagingSource
 import com.adityawidayanto.movies.domain.repository.MovieRepository
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -27,6 +29,12 @@ class MovieUseCaseTest {
 
     @Mock
     lateinit var moviePagingSource: MoviePagingSource
+
+    @Mock
+    lateinit var movieLocalDataSource: MovieLocalDataSource
+
+    @Mock
+    lateinit var movieDao: MovieDao
 
     @Before
     fun setUp() {
@@ -82,4 +90,41 @@ class MovieUseCaseTest {
         }
         assertEquals(resultValue, request)
     }
+
+    @Test
+    fun `insert favorite moviedb and get data`() {
+        val returnValue: LiveData<PagingData<Movie>> = Pager(
+            config = PagingConfig(
+                pageSize = 10
+            ),
+            pagingSourceFactory = { movieDao.getAllFavMovie() }
+        ).liveData
+        runBlocking {
+            repository.addMovieFavorite(
+                Movie(
+                    1,
+                    "overview",
+                    "path",
+                    "release",
+                    "title",
+                    "backDrop",
+                    5000.1,
+                    7.9,
+                    2000
+                )
+            )
+        }
+        val request = runBlocking {
+            `when`(
+                repository.getPagingFavoriteMovie(
+                )
+            ).thenReturn(
+                returnValue
+            )
+            useCase.getPagingFavoriteMovie()
+        }
+        assertEquals(returnValue, request)
+    }
+
+
 }

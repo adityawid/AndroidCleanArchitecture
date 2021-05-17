@@ -3,6 +3,7 @@ package com.adityawidayanto.movies.data.repository
 import com.adityawidayanto.core.utils.Result
 import com.adityawidayanto.core.utils.test.CoroutineTestRule
 import com.adityawidayanto.core.utils.test.runBlockingTest
+import com.adityawidayanto.db.TvShowDao
 import com.adityawidayanto.db.entity.TvShow
 import com.adityawidayanto.movies.data.bean.responses.TvShowListBean
 import com.adityawidayanto.movies.data.repository.tvshow.TvShowRemoteDataSource
@@ -24,6 +25,9 @@ class TvShowRepositoryImplTest {
 
     @Mock
     lateinit var remoteDataSource: TvShowRemoteDataSource
+
+    @Mock
+    lateinit var tvShowDao: TvShowDao
 
     companion object {
         private val tvshow = listOf(
@@ -48,7 +52,8 @@ class TvShowRepositoryImplTest {
         MockitoAnnotations.initMocks(this)
         repository = TvShowRepositoryImpl(
             coroutineTestRule.testDispatcherProvider,
-            remoteDataSource
+            remoteDataSource,
+            tvShowDao = tvShowDao
         )
     }
 

@@ -1,11 +1,15 @@
 package com.adityawidayanto.movies.data.repository
 
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.liveData
 import com.adityawidayanto.core.utils.Result
 import com.adityawidayanto.core.utils.test.CoroutineTestRule
 import com.adityawidayanto.core.utils.test.runBlockingTest
 import com.adityawidayanto.db.MovieDao
 import com.adityawidayanto.db.entity.Movie
 import com.adityawidayanto.movies.data.bean.responses.MovieListBean
+import com.adityawidayanto.movies.data.repository.movie.MovieLocalDataSource
 import com.adityawidayanto.movies.data.repository.movie.MoviePagingSource
 import com.adityawidayanto.movies.data.repository.movie.MovieRemoteDataSource
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -51,6 +55,10 @@ class MovieRepositoryImplTest {
 
     @Mock
     lateinit var movieDao: MovieDao
+
+    @Mock
+    lateinit var movieLocalDataSource: MovieLocalDataSource
+
     @Before
     fun setUp() {
         MockitoAnnotations.initMocks(this)
@@ -58,7 +66,7 @@ class MovieRepositoryImplTest {
             coroutineTestRule.testDispatcherProvider,
             remoteDataSource,
             moviePagingSource,
-            movieDao = movieDao
+            movieLocalDataSource = movieLocalDataSource
         )
     }
 
@@ -73,6 +81,52 @@ class MovieRepositoryImplTest {
                 )
             ).thenReturn(returnValue)
             val response = repository.getPopularMovie(1, 10)
+            assertEquals(returnValue, response)
+        }
+
+    @Test
+    fun `insert Favorite movie from local db and get favorite movie is not empty`() =
+        coroutineTestRule.runBlockingTest {
+            val returnValue = Pager(
+                config = PagingConfig(
+                    pageSize = 10
+                ),
+                pagingSourceFactory = { movieDao.getAllFavMovie() }
+            ).liveData
+            movieLocalDataSource.addFavoriteMovie(
+                Movie(
+                    1,
+                    "overview",
+                    "path",
+                    "release",
+                    "title",
+                    "backDrop",
+                    5000.1,
+                    7.9,
+                    2000
+                )
+            )
+            `when`(
+                movieLocalDataSource.getFavMovies()
+            ).thenReturn(returnValue)
+            val response = repository.getPagingFavoriteMovie()
+            assertEquals(returnValue, response)
+        }
+
+    @Test
+    fun `favorite movie is empty`() =
+        coroutineTestRule.runBlockingTest {
+            val returnValue = Pager(
+                config = PagingConfig(
+                    pageSize = 10
+                ),
+                pagingSourceFactory = { movieDao.getAllFavMovie() }
+            ).liveData
+
+            `when`(
+                movieLocalDataSource.getFavMovies()
+            ).thenReturn(returnValue)
+            val response = repository.getPagingFavoriteMovie()
             assertEquals(returnValue, response)
         }
 
