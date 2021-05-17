@@ -27,8 +27,8 @@ class FavoriteTvShowFragment :
     }
 
     override fun initView() {
-        binding.rvFavList.layoutManager = LinearLayoutManager(context)
-        binding.rvFavList.adapter = adapter
+        binding.rvFavTvShowList.layoutManager = LinearLayoutManager(context)
+        binding.rvFavTvShowList.adapter = adapter
     }
 
     override fun getViewModelClass(): Class<FavoriteTvShowViewModel> =

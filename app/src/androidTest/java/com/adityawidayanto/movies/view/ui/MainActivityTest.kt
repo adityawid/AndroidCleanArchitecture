@@ -12,6 +12,7 @@ import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import com.adityawidayanto.core.utils.test.EspressoIdlingResource
 import com.adityawidayanto.movies.R
+import junit.framework.AssertionFailedError
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
@@ -27,7 +28,7 @@ class MainActivityTest {
     }
 
     @Test
-    fun clickItemMovie() {
+    fun clickItemMovieAndFavorite() {
         onView(withId(R.id.rv_movie_list)).check(matches(isDisplayed()))
         onView(withId(R.id.rv_movie_list)).perform(
             scrollToPosition<RecyclerView.ViewHolder>(
@@ -44,6 +45,35 @@ class MainActivityTest {
         onView(withId(R.id.date)).check(matches(isDisplayed()))
         onView(withId(R.id.titleOverview)).check(matches(isDisplayed()))
         onView(withId(R.id.titleOverview)).check(matches(withText("Overview")))
+        try {
+            onView(withId(R.id.btn_favorite)).check(matches(isNotChecked()))
+            onView(withId(R.id.btn_favorite)).perform(click())
+        } catch (e: AssertionFailedError) {
+            onView(withId(R.id.btn_favorite)).check(matches(isChecked()))
+        }
+
+    }
+
+    @Test
+    fun getFavoriteDetailStatusFromApiList() {
+        onView(withId(R.id.rv_movie_list)).check(matches(isDisplayed()))
+        onView(withId(R.id.rv_movie_list)).perform(
+            scrollToPosition<RecyclerView.ViewHolder>(
+                10
+            )
+        )
+        onView(withId(R.id.rv_movie_list)).perform(
+            actionOnItemAtPosition<RecyclerView.ViewHolder>(
+                10,
+                click()
+            )
+        )
+        onView(withId(R.id.titleDetail)).check(matches(isDisplayed()))
+        onView(withId(R.id.date)).check(matches(isDisplayed()))
+        onView(withId(R.id.titleOverview)).check(matches(isDisplayed()))
+        onView(withId(R.id.titleOverview)).check(matches(withText("Overview")))
+        onView(withId(R.id.btn_favorite)).check(matches(isChecked()))
+
     }
 
     @Test
@@ -65,6 +95,30 @@ class MainActivityTest {
         onView(withId(R.id.date)).check(matches(isDisplayed()))
         onView(withId(R.id.titleOverview)).check(matches(isDisplayed()))
         onView(withId(R.id.titleOverview)).check(matches(withText("Overview")))
+    }
+
+
+    @Test
+    fun getFavoriteDetailStatusFromLocal() {
+        onView(withId(R.id.nav_favorite)).check(matches(isDisplayed()))
+        onView(withId(R.id.nav_favorite)).perform(click())
+        onView(withId(R.id.rv_fav_movie_list)).check(matches(isDisplayed()))
+        onView(withId(R.id.rv_fav_movie_list)).perform(
+            scrollToPosition<RecyclerView.ViewHolder>(
+                0
+            )
+        )
+        onView(withId(R.id.rv_fav_movie_list)).perform(
+            actionOnItemAtPosition<RecyclerView.ViewHolder>(
+                0,
+                click()
+            )
+        )
+        onView(withId(R.id.titleDetail)).check(matches(isDisplayed()))
+        onView(withId(R.id.date)).check(matches(isDisplayed()))
+        onView(withId(R.id.titleOverview)).check(matches(isDisplayed()))
+        onView(withId(R.id.titleOverview)).check(matches(withText("Overview")))
+        onView(withId(R.id.btn_favorite)).check(matches(isChecked()))
 
     }
 
