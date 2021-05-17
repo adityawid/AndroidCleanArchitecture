@@ -52,7 +52,6 @@ class FavoriteMovieFragment : BaseFragment<FavoriteMovieFragmentBinding, Favorit
                 )
             )
         }
-
     }
 
     override fun getViewModelClass(): Class<FavoriteMovieViewModel> =

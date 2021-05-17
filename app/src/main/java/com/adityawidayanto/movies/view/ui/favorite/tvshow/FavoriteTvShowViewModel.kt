@@ -1,11 +1,13 @@
 package com.adityawidayanto.movies.view.ui.favorite.tvshow
 
 import androidx.lifecycle.ViewModel
-import com.adityawidayanto.movies.domain.usecase.MovieUseCase
+import androidx.lifecycle.viewModelScope
+import androidx.paging.cachedIn
+import com.adityawidayanto.movies.domain.usecase.TvShowUseCase
 import javax.inject.Inject
 
 class FavoriteTvShowViewModel @Inject constructor(
-    private val tvUseCase: MovieUseCase
+    private val tvShowUseCase: TvShowUseCase
 ) : ViewModel() {
-    // TODO: Implement the ViewModel
+    val favTvShows = tvShowUseCase.getPagingFavoriteTvShow().cachedIn(viewModelScope)
 }

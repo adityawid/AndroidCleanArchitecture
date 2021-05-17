@@ -17,6 +17,10 @@ class TvShowUseCase @Inject constructor(private val repository: TvShowRepository
         return repository.getPagingPopularTvShow()
     }
 
+    fun getPagingFavoriteTvShow(): LiveData<PagingData<TvShow>> {
+        return repository.getPagingFavoriteTvShow()
+    }
+
     suspend fun addTvShowFavorite(tvShow: TvShow) {
         repository.addTvShowFavorite(tvShow)
     }

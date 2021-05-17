@@ -1,21 +1,30 @@
 package com.adityawidayanto.movies.data.repository.tvshow
 
-import com.adityawidayanto.core.data.remote.RemoteDataSource
-import com.adityawidayanto.core.utils.Result
-import com.adityawidayanto.movies.data.api.MovieApi
-import com.adityawidayanto.movies.data.bean.responses.TvShowListBean
-import kotlinx.coroutines.CoroutineDispatcher
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.liveData
+import com.adityawidayanto.db.TvShowDao
+import com.adityawidayanto.db.entity.TvShow
 
-class TvShowLocalDataSource(private val movieApi: MovieApi, private val apiKey: String) :
-    RemoteDataSource() {
-    suspend fun getPopularTvShow(
-        dispatcher: CoroutineDispatcher,
-        page: Int,
-        pageSize: Int
-    ): Result<TvShowListBean> {
-        return safeApiCall(dispatcher) {
-            movieApi.getPopularTvShows(apiKey)
-        }
+class TvShowLocalDataSource(
+    private val tvShowDao: TvShowDao
+) {
+    fun getFavTvShows() = Pager(
+        config = PagingConfig(
+            10
+        )
+    )
+    { tvShowDao.getAllFavTvShow() }
+        .liveData
+
+    suspend fun addFavoriteTvShow(tvShow: TvShow) {
+        tvShowDao.insert(tvShow)
     }
+
+    suspend fun deleteTvShowFavorite(tvShow: TvShow) {
+        tvShowDao.deleteFavorite(tvShow.id)
+    }
+
+    suspend fun checkTvShowFavorite(tvShow: TvShow): Int = tvShowDao.checkIdTvShow(tvShow.id)
 
 }

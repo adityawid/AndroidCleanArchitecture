@@ -5,9 +5,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.paging.PagingData
 import com.adityawidayanto.core.utils.Result
 import com.adityawidayanto.core.utils.dispatcher.DispatcherProvider
-import com.adityawidayanto.db.TvShowDao
 import com.adityawidayanto.db.entity.TvShow
 import com.adityawidayanto.movies.data.bean.responses.TvShowListBean
+import com.adityawidayanto.movies.data.repository.tvshow.TvShowLocalDataSource
 import com.adityawidayanto.movies.data.repository.tvshow.TvShowRemoteDataSource
 import com.adityawidayanto.movies.domain.repository.TvShowRepository
 import javax.inject.Inject
@@ -15,7 +15,7 @@ import javax.inject.Inject
 class TvShowRepositoryImpl @Inject constructor(
     private val dispatcher: DispatcherProvider,
     private val remoteDataSource: TvShowRemoteDataSource,
-    private val tvShowDao: TvShowDao
+    private val tvShowLocalDataSource: TvShowLocalDataSource
 ) : TvShowRepository {
 
     override suspend fun getPopularTvShow(
@@ -37,14 +37,17 @@ class TvShowRepositoryImpl @Inject constructor(
         return MutableLiveData()
     }
 
+    override fun getPagingFavoriteTvShow(): LiveData<PagingData<TvShow>> =
+        tvShowLocalDataSource.getFavTvShows()
+
     override suspend fun addTvShowFavorite(tvShow: TvShow) {
-        tvShowDao.insert(tvShow)
+        tvShowLocalDataSource.addFavoriteTvShow(tvShow)
     }
 
     override suspend fun deleteTvShowFavorite(tvShow: TvShow) {
-        tvShowDao.deleteFavorite(tvShow.id)
+        tvShowLocalDataSource.deleteTvShowFavorite(tvShow)
     }
 
     override suspend fun checkTvShowFavorite(tvShow: TvShow): Int =
-        tvShowDao.checkIdTvShow(tvShow.id)
+        tvShowLocalDataSource.checkTvShowFavorite(tvShow)
 }

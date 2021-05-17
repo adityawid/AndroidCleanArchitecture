@@ -9,6 +9,7 @@ import com.adityawidayanto.movies.data.bean.responses.TvShowListBean
 interface TvShowRepository {
     suspend fun getPopularTvShow(page: Int, pageSize: Int): Result<TvShowListBean>
     fun getPagingPopularTvShow(): LiveData<PagingData<TvShow>>
+    fun getPagingFavoriteTvShow(): LiveData<PagingData<TvShow>>
     suspend fun addTvShowFavorite(tvShow: TvShow)
     suspend fun deleteTvShowFavorite(tvShow: TvShow)
     suspend fun checkTvShowFavorite(tvShow: TvShow): Int

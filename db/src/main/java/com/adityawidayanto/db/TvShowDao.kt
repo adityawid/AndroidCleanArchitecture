@@ -1,5 +1,6 @@
 package com.adityawidayanto.db
 
+import androidx.paging.PagingSource
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -14,6 +15,9 @@ abstract class TvShowDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     abstract suspend fun insert(tvShow: TvShow)
+
+    @Query("SELECT * FROM popular_tvShows")
+    abstract fun getAllFavTvShow(): PagingSource<Int, TvShow>
 
     @Query("SELECT count(*) FROM popular_tvShows WHERE id = :id")
     abstract suspend fun checkIdTvShow(id: Int): Int

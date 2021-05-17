@@ -9,6 +9,7 @@ import com.adityawidayanto.movies.data.api.MovieApi
 import com.adityawidayanto.movies.data.repository.movie.MovieLocalDataSource
 import com.adityawidayanto.movies.data.repository.movie.MoviePagingSource
 import com.adityawidayanto.movies.data.repository.movie.MovieRemoteDataSource
+import com.adityawidayanto.movies.data.repository.tvshow.TvShowLocalDataSource
 import com.adityawidayanto.movies.data.repository.tvshow.TvShowRemoteDataSource
 import dagger.Module
 import dagger.Provides
@@ -57,5 +58,13 @@ class MovieModule {
         movieDao: MovieDao
     ) = MovieLocalDataSource(
         movieDao
+    )
+
+    @Provides
+    @CoreScope
+    fun provideTvShowLocalDataSource(
+        tvShowDao: TvShowDao
+    ) = TvShowLocalDataSource(
+        tvShowDao
     )
 }

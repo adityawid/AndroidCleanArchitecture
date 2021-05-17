@@ -7,7 +7,7 @@ import com.adityawidayanto.db.MovieDao
 import com.adityawidayanto.db.entity.Movie
 
 class MovieLocalDataSource(
-    private val movieDao: MovieDao,
+    private val movieDao: MovieDao
 ) {
     fun getFavMovies() = Pager(
         config = PagingConfig(

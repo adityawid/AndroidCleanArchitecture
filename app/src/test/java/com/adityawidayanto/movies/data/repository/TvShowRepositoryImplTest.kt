@@ -6,6 +6,7 @@ import com.adityawidayanto.core.utils.test.runBlockingTest
 import com.adityawidayanto.db.TvShowDao
 import com.adityawidayanto.db.entity.TvShow
 import com.adityawidayanto.movies.data.bean.responses.TvShowListBean
+import com.adityawidayanto.movies.data.repository.tvshow.TvShowLocalDataSource
 import com.adityawidayanto.movies.data.repository.tvshow.TvShowRemoteDataSource
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.junit.Assert.assertEquals
@@ -25,6 +26,9 @@ class TvShowRepositoryImplTest {
 
     @Mock
     lateinit var remoteDataSource: TvShowRemoteDataSource
+
+    @Mock
+    lateinit var tvShowLocalDataSource: TvShowLocalDataSource
 
     @Mock
     lateinit var tvShowDao: TvShowDao
@@ -53,7 +57,7 @@ class TvShowRepositoryImplTest {
         repository = TvShowRepositoryImpl(
             coroutineTestRule.testDispatcherProvider,
             remoteDataSource,
-            tvShowDao = tvShowDao
+            tvShowLocalDataSource = tvShowLocalDataSource
         )
     }
 
