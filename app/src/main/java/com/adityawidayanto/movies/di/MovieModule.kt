@@ -53,7 +53,9 @@ class MovieModule {
 
     @Provides
     @CoreScope
-    fun provideMovieLocalDataSource(movieDao: MovieDao) = MovieLocalDataSource(
+    fun provideMovieLocalDataSource(
+        movieDao: MovieDao
+    ) = MovieLocalDataSource(
         movieDao
     )
 }

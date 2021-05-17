@@ -29,5 +29,9 @@
         android:id="@+id/nav_favorite"
         android:name="com.adityawidayanto.movies.view.ui.favorite.FavoriteFragment"
         android:label="fragment_favorite"
-        tools:layout="@layout/fragment_favorite" />
+        tools:layout="@layout/fragment_favorite">
+        <action
+            android:id="@+id/action_nav_favorite_to_detailFragment"
+            app:destination="@id/detailFragment" />
+    </fragment>
 </navigation>

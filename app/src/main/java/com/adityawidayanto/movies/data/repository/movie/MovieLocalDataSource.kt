@@ -1,12 +1,22 @@
 package com.adityawidayanto.movies.data.repository.movie
 
-import androidx.lifecycle.LiveData
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.liveData
 import com.adityawidayanto.db.MovieDao
 import com.adityawidayanto.db.entity.Movie
 
-class MovieLocalDataSource(private val movieDao: MovieDao) {
+class MovieLocalDataSource(
+    private val movieDao: MovieDao,
+) {
+    fun getFavMovies() = Pager(
+        config = PagingConfig(
+            10
+        )
+    )
+    { movieDao.getAllFavMovie() }
+        .liveData
 
-    suspend fun getFavoriteMovies(): LiveData<Movie> = movieDao.findAll()
     suspend fun addFavoriteMovie(movie: Movie) {
         movieDao.insert(movie)
     }

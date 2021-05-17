@@ -46,6 +46,9 @@ class MovieRepositoryImpl @Inject constructor(
         pagingSourceFactory = { moviePagingSource }
     ).liveData
 
+    override fun getPagingFavoriteMovie(): LiveData<PagingData<Movie>> =
+        movieLocalDataSource.getFavMovies()
+
     override suspend fun addMovieFavorite(movie: Movie) {
         movieLocalDataSource.addFavoriteMovie(movie)
     }

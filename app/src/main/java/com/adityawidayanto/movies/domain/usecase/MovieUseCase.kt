@@ -17,6 +17,10 @@ class MovieUseCase @Inject constructor(private val repository: MovieRepository) 
         return repository.getPagingPopularMovie()
     }
 
+    fun getPagingFavoriteMovie(): LiveData<PagingData<Movie>> {
+        return repository.getPagingFavoriteMovie()
+    }
+
     suspend fun addMovieFavorite(movie: Movie) {
         repository.addMovieFavorite(movie)
     }

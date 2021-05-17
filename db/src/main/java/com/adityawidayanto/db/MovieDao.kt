@@ -1,6 +1,6 @@
 package com.adityawidayanto.db
 
-import androidx.lifecycle.LiveData
+import androidx.paging.PagingSource
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -20,7 +20,7 @@ abstract class MovieDao {
     abstract suspend fun checkIdMovie(id: Int): Int
 
     @Query("SELECT * FROM popular_movies")
-    abstract fun findAll(): LiveData<Movie>
+    abstract fun getAllFavMovie(): PagingSource<Int, Movie>
 
     @Query("DELETE FROM popular_movies WHERE id = :id")
     abstract suspend fun deleteFavorite(id: Int)
