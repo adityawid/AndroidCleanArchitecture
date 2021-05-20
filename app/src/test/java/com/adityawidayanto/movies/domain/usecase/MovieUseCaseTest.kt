@@ -9,7 +9,6 @@ import com.adityawidayanto.core.utils.Result.Success
 import com.adityawidayanto.db.MovieDao
 import com.adityawidayanto.db.entity.Movie
 import com.adityawidayanto.movies.data.bean.responses.MovieListBean
-import com.adityawidayanto.movies.data.repository.movie.MovieLocalDataSource
 import com.adityawidayanto.movies.data.repository.movie.MoviePagingSource
 import com.adityawidayanto.movies.domain.repository.MovieRepository
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -29,9 +28,6 @@ class MovieUseCaseTest {
 
     @Mock
     lateinit var moviePagingSource: MoviePagingSource
-
-    @Mock
-    lateinit var movieLocalDataSource: MovieLocalDataSource
 
     @Mock
     lateinit var movieDao: MovieDao

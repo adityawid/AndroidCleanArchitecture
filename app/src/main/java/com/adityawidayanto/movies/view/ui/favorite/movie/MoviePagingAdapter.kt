@@ -12,18 +12,21 @@ import com.adityawidayanto.movies.databinding.ItemMovieBinding
 import com.bumptech.glide.Glide
 
 class MoviePagingAdapter :
-    PagingDataAdapter<Movie, MoviePagingAdapter.MyViewHolder>(ListItemCallback()) {
+    PagingDataAdapter<Movie, MoviePagingAdapter.MyViewHolder>(listItemCallback) {
     var onItemClick: ((Movie) -> Unit)? = null
 
-    private class ListItemCallback : DiffUtil.ItemCallback<Movie>() {
-        override fun areItemsTheSame(oldItem: Movie, newItem: Movie): Boolean {
-            return oldItem.id == newItem.id
-        }
+    companion object {
+        val listItemCallback = object : DiffUtil.ItemCallback<Movie>() {
+            override fun areItemsTheSame(oldItem: Movie, newItem: Movie): Boolean {
+                return oldItem.id == newItem.id
+            }
 
-        override fun areContentsTheSame(oldItem: Movie, newItem: Movie): Boolean {
-            return oldItem == newItem
+            override fun areContentsTheSame(oldItem: Movie, newItem: Movie): Boolean {
+                return oldItem == newItem
+            }
         }
     }
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
