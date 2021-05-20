@@ -1,7 +1,5 @@
 package com.adityawidayanto.movies.view.ui.movielist
 
-import android.os.Bundle
-import android.view.View
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.adityawidayanto.core.CoreApp
@@ -21,25 +19,7 @@ class PopularMovieFragment : BaseFragment<PopularMovieFragmentBinding, PopularMo
         MoviePagingAdapter()
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-//        EspressoIdlingResource.increment()
-//        binding.movieProgressBar.visibility = View.VISIBLE
-//        vm.getPopularMovie()
-    }
-
     override fun initObservers() {
-//        vm.movieList.observe(viewLifecycleOwner, {
-//            if (it != null) {
-//                binding.movieProgressBar.visibility = View.GONE
-//                if (!EspressoIdlingResource.idlingResource.isIdleNow) {
-//                    EspressoIdlingResource.decrement()
-//                }
-//                adapter.setData(it)
-//                adapter.notifyDataSetChanged()
-//            }
-//
-//        })
         vm.movies.observe(viewLifecycleOwner, {
             adapter.submitData(viewLifecycleOwner.lifecycle, it)
         })

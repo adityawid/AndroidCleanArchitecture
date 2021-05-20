@@ -24,12 +24,6 @@ class DetailViewModel @Inject constructor(
         _detail.value = detailBean
     }
 
-    fun addFavorite(movie: Movie) {
-        viewModelScope.launch {
-            movieUseCase.addMovieFavorite(movie)
-        }
-    }
-
     fun addMovieFavorite(movie: Movie) {
         viewModelScope.launch {
             movieUseCase.addMovieFavorite(movie)
@@ -39,12 +33,6 @@ class DetailViewModel @Inject constructor(
     fun addTvShowFavorite(tvShow: TvShow) {
         viewModelScope.launch {
             tvShowUseCase.addTvShowFavorite(tvShow)
-        }
-    }
-
-    fun removeFavorite(movie: Movie) {
-        viewModelScope.launch {
-            movieUseCase.removeMovieFavorite(movie)
         }
     }
 
