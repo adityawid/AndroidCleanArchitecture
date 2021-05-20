@@ -12,6 +12,7 @@ import com.adityawidayanto.movies.data.bean.responses.MovieListBean
 import com.adityawidayanto.movies.data.repository.movie.MoviePagingSource
 import com.adityawidayanto.movies.domain.repository.MovieRepository
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
 import org.junit.Before
@@ -89,12 +90,12 @@ class MovieUseCaseTest {
 
     @Test
     fun `insert favorite moviedb and get data`() {
-        val returnValue: LiveData<PagingData<Movie>> = Pager(
+        val returnValue: Flow<PagingData<Movie>> = Pager(
             config = PagingConfig(
                 pageSize = 10
             ),
             pagingSourceFactory = { movieDao.getAllFavMovie() }
-        ).liveData
+        ).flow
         runBlocking {
             repository.addMovieFavorite(
                 Movie(

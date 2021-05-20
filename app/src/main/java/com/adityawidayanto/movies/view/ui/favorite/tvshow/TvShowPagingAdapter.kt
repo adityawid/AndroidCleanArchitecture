@@ -12,16 +12,18 @@ import com.adityawidayanto.movies.databinding.ItemMovieBinding
 import com.bumptech.glide.Glide
 
 class TvShowPagingAdapter :
-    PagingDataAdapter<TvShow, TvShowPagingAdapter.MyViewHolder>(ListItemCallback()) {
+    PagingDataAdapter<TvShow, TvShowPagingAdapter.MyViewHolder>(listItemCallback) {
     var onItemClick: ((TvShow) -> Unit)? = null
 
-    private class ListItemCallback : DiffUtil.ItemCallback<TvShow>() {
-        override fun areItemsTheSame(oldItem: TvShow, newItem: TvShow): Boolean {
-            return oldItem.id == newItem.id
-        }
+    companion object {
+        val listItemCallback = object : DiffUtil.ItemCallback<TvShow>() {
+            override fun areItemsTheSame(oldItem: TvShow, newItem: TvShow): Boolean {
+                return oldItem.id == newItem.id
+            }
 
-        override fun areContentsTheSame(oldItem: TvShow, newItem: TvShow): Boolean {
-            return oldItem == newItem
+            override fun areContentsTheSame(oldItem: TvShow, newItem: TvShow): Boolean {
+                return oldItem == newItem
+            }
         }
     }
 

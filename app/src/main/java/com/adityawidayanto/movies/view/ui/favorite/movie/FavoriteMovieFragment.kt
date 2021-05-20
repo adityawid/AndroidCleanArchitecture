@@ -1,5 +1,6 @@
 package com.adityawidayanto.movies.view.ui.favorite.movie
 
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.adityawidayanto.core.CoreApp
@@ -10,6 +11,8 @@ import com.adityawidayanto.movies.data.bean.DetailBean
 import com.adityawidayanto.movies.databinding.FavoriteMovieFragmentBinding
 import com.adityawidayanto.movies.di.DaggerMovieComponent
 import com.adityawidayanto.movies.view.ui.favorite.FavoriteFragmentDirections
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 class FavoriteMovieFragment : BaseFragment<FavoriteMovieFragmentBinding, FavoriteMovieViewModel>() {
 
@@ -26,9 +29,14 @@ class FavoriteMovieFragment : BaseFragment<FavoriteMovieFragmentBinding, Favorit
     }
 
     override fun initObservers() {
-        vm.favMovies.observe(viewLifecycleOwner, {
-            adapter.submitData(viewLifecycleOwner.lifecycle, it)
-        })
+//        vm.favMovies.observe(viewLifecycleOwner, {
+//            adapter.submitData(viewLifecycleOwner.lifecycle, it)
+//        })
+        lifecycleScope.launch {
+            vm.favMovies.collectLatest {
+                adapter.submitData(it)
+            }
+        }
     }
 
     override fun initView() {

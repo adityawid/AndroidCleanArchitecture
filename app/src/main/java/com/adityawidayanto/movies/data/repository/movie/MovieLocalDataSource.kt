@@ -2,7 +2,6 @@ package com.adityawidayanto.movies.data.repository.movie
 
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
-import androidx.paging.liveData
 import com.adityawidayanto.db.MovieDao
 import com.adityawidayanto.db.entity.Movie
 
@@ -15,7 +14,7 @@ class MovieLocalDataSource(
         )
     )
     { movieDao.getAllFavMovie() }
-        .liveData
+        .flow
 
     suspend fun addFavoriteMovie(movie: Movie) {
         movieDao.insert(movie)

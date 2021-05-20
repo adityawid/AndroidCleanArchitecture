@@ -1,8 +1,9 @@
 package com.adityawidayanto.movies.data.repository
 
+import androidx.paging.AsyncPagingDataDiffer
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
-import androidx.paging.liveData
+import androidx.recyclerview.widget.ListUpdateCallback
 import com.adityawidayanto.core.utils.Result
 import com.adityawidayanto.core.utils.test.CoroutineTestRule
 import com.adityawidayanto.core.utils.test.runBlockingTest
@@ -12,7 +13,13 @@ import com.adityawidayanto.movies.data.bean.responses.MovieListBean
 import com.adityawidayanto.movies.data.repository.movie.MovieLocalDataSource
 import com.adityawidayanto.movies.data.repository.movie.MoviePagingSource
 import com.adityawidayanto.movies.data.repository.movie.MovieRemoteDataSource
+import com.adityawidayanto.movies.view.ui.favorite.movie.MovieDaoFake
+import com.adityawidayanto.movies.view.ui.favorite.movie.MoviePagingAdapter
+import com.google.common.truth.Truth
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Rule
@@ -59,6 +66,15 @@ class MovieRepositoryImplTest {
     @Mock
     lateinit var movieLocalDataSource: MovieLocalDataSource
 
+    @ExperimentalCoroutinesApi
+    private val provider = CoroutineTestRule().testDispatcherProvider.unconfined
+    val noopListUpdateCallback = object : ListUpdateCallback {
+        override fun onInserted(position: Int, count: Int) {}
+        override fun onRemoved(position: Int, count: Int) {}
+        override fun onMoved(fromPosition: Int, toPosition: Int) {}
+        override fun onChanged(position: Int, count: Int, payload: Any?) {}
+    }
+
     @Before
     fun setUp() {
         MockitoAnnotations.initMocks(this)
@@ -68,6 +84,36 @@ class MovieRepositoryImplTest {
             moviePagingSource,
             movieLocalDataSource = movieLocalDataSource
         )
+    }
+
+    @Test
+    fun `when fetch movie from api, get movie from local`() = runBlockingTest {
+        val fakeDao = MovieDaoFake(movies)
+
+        val fakeLocalData = MovieLocalDataSource(fakeDao)
+        val fakeRepository = MovieRepositoryImpl(
+            coroutineTestRule.testDispatcherProvider,
+            remoteDataSource, moviePagingSource, fakeLocalData
+        )
+        val differ = AsyncPagingDataDiffer(
+            diffCallback = MoviePagingAdapter.listItemCallback,
+            updateCallback = noopListUpdateCallback,
+            mainDispatcher = provider,
+            workerDispatcher = provider,
+        )
+        val job = launch {
+            fakeRepository.getPagingFavoriteMovie().collectLatest {
+                differ.submitData(it)
+            }
+        }
+
+        advanceUntilIdle()
+
+        println("test Adit " + differ.snapshot())
+        Truth.assertThat(differ.snapshot()).containsExactly(
+            movies[0]
+        )
+        job.cancel()
     }
 
     @Test
@@ -92,7 +138,7 @@ class MovieRepositoryImplTest {
                     pageSize = 10
                 ),
                 pagingSourceFactory = { movieDao.getAllFavMovie() }
-            ).liveData
+            ).flow
             movieLocalDataSource.addFavoriteMovie(
                 Movie(
                     1,

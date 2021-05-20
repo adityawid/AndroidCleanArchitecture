@@ -13,6 +13,7 @@ import com.adityawidayanto.movies.data.repository.movie.MovieLocalDataSource
 import com.adityawidayanto.movies.data.repository.movie.MoviePagingSource
 import com.adityawidayanto.movies.data.repository.movie.MovieRemoteDataSource
 import com.adityawidayanto.movies.domain.repository.MovieRepository
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class MovieRepositoryImpl @Inject constructor(
@@ -46,7 +47,7 @@ class MovieRepositoryImpl @Inject constructor(
         pagingSourceFactory = { moviePagingSource }
     ).liveData
 
-    override fun getPagingFavoriteMovie(): LiveData<PagingData<Movie>> =
+    override fun getPagingFavoriteMovie(): Flow<PagingData<Movie>> =
         movieLocalDataSource.getFavMovies()
 
     override suspend fun addMovieFavorite(movie: Movie) {

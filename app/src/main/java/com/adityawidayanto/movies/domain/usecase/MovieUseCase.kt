@@ -6,6 +6,7 @@ import com.adityawidayanto.core.utils.Result
 import com.adityawidayanto.db.entity.Movie
 import com.adityawidayanto.movies.data.bean.responses.MovieListBean
 import com.adityawidayanto.movies.domain.repository.MovieRepository
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class MovieUseCase @Inject constructor(private val repository: MovieRepository) {
@@ -17,7 +18,7 @@ class MovieUseCase @Inject constructor(private val repository: MovieRepository) 
         return repository.getPagingPopularMovie()
     }
 
-    fun getPagingFavoriteMovie(): LiveData<PagingData<Movie>> {
+    fun getPagingFavoriteMovie(): Flow<PagingData<Movie>> {
         return repository.getPagingFavoriteMovie()
     }
 
