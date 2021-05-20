@@ -66,7 +66,7 @@ class FavoriteTvShowViewModelTest {
     }
 
     @Test
-    fun `should return a paging response of favorite movies data`() = runBlockingTest(provider) {
+    fun `should return a paging response of favorite tv show data`() = runBlockingTest(provider) {
         val tvShows = listOf(
             TvShow(
                 "firstAirDate",
