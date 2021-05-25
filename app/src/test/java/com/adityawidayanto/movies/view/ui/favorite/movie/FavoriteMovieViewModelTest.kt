@@ -187,14 +187,25 @@ class FavoriteMovieViewModelTest {
 }
 
 class MovieDaoFake(val movies: List<Movie>) : MovieDao() {
+    var listMovies = ArrayList<Movie>()
     override suspend fun insertAll(movies: List<Movie>) {
 
     }
 
-    override suspend fun insert(movies: Movie) {
+    override suspend fun insert(movie: Movie) {
+        listMovies.add(movie)
     }
 
-    override suspend fun checkIdMovie(id: Int): Int = 1
+    override suspend fun checkIdMovie(id: Int): Int {
+        var count = 0
+        for (movie in listMovies) {
+            if (movie.id == id) {
+                count++
+            }
+
+        }
+        return count
+    }
 
     override fun getAllFavMovie(): PagingSource<Int, Movie> {
         return object : PagingSource<Int, Movie>() {
